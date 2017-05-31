@@ -27,8 +27,14 @@ import javax.ws.rs.core.Response;
 public class LoginController implements Serializable {
    @ManagedProperty(value = "#{navigation}")
     private Navigation navigation;
-   @ManagedProperty(value="#{user}")
+  @ManagedProperty(value = "#{user}")
      private User loginUser ;
+     
+     public LoginController()
+     {
+         
+     }
+     
     public void authentication() throws Exception
     {
        // getLoginUser().
@@ -41,8 +47,9 @@ public class LoginController implements Serializable {
     {
         String xmlresponse = response.readEntity(String.class);
        System.out.println(xmlresponse);
-       loginUser = (User)CommonLibrary.unmarshalling(xmlresponse, User.class);
+       this.setLoginUser((User)CommonLibrary.unmarshalling(xmlresponse, User.class));
          navigation.setCurrentPage("mainMenu/menus.xhtml");
+        // System.out.println(this.getLoginUser().getUsername());
     }
    
         
