@@ -39,17 +39,12 @@ public class AccountController implements Serializable {
         Response response=CommonLibrary.sendRESTRequest(url, "", MediaType.TEXT_PLAIN, "GET");
         if(response.getStatus()==200)
         {
-           try
-           {
+          
                String xml = response.readEntity(String.class);
            
            this.setAccounts((AccountsBean)CommonLibrary.unmarshalling(xml, AccountsBean.class));
            System.out.println(xml);
-           }
-           catch(Exception e)
-           {
-               System.out.println(e.getMessage());
-           }
+           
         }
         
         FacesContext.getCurrentInstance().getExternalContext().redirect("/KiraVisionWeb/accounts/accounts.xhtml");

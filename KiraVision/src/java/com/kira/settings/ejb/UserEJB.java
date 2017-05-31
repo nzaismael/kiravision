@@ -5,6 +5,7 @@
  */
 package com.kira.settings.ejb;
 
+import com.kira.settings.entities.CurrencyBean;
 import com.kira.settings.entities.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,4 +71,7 @@ private EntityManager em;
       
   
   }
+  
+  
+  
 }

@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -51,9 +52,11 @@ public class AccountBean implements Serializable{
   @XmlElement(name="MODIFIEDON")
   @Temporal(javax.persistence.TemporalType.TIMESTAMP)
   private java.util.Date modifiedOn;
+ 
   @XmlElement(name="CREATEDBY")
   private User createdBy;
   @XmlElement(name="MODIFIEDBY")
+ 
   private User modifiedBy;
   @XmlElement(name="STATE")
   @Column(name="state",nullable=false,length=1)

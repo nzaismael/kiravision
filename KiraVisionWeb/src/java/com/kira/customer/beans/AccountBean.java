@@ -5,50 +5,65 @@
  */
 package com.kira.customer.beans;
 
+
 import com.settings.beans.User;
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author AOS
  */
+@Entity
+@Table(name="accounts")
+@XmlRootElement(name="ACCOUNT")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AccountBean implements Serializable{
-   
+  @Id
+@GeneratedValue(strategy=GenerationType.IDENTITY)  
   @XmlElement(name="ID")
   private Long id;
   @XmlElement(name="ACCOUNTNUMBER")
-  
+  @Column(name="accountNumber",length=10,nullable =false,unique=true)
   private String accountNumber;
   @XmlElement(name="ACCOUNTDESCRIPTION")
-  
-  private String accountDescription;
+  @Column(name="accountDescription",nullable=false,length=255)
+  String accountDescription;
   @XmlElement(name="ACCOUNTTYPE")
- 
+  @Column(name="accountType",nullable=false,length=1)
   private String accountType; // Actif or Passif
   @XmlElement(name="ACCOUNTOWNER")
-  
+  @Column(name="accountOwner",nullable=false,length=3)
   private String accountOwner; //B bank,P partnerCommissions payable by customers,C money owed to Customers, I Income account 
   // CH check waiting for payment, TR transfers waiting for payment
   @XmlElement(name="CREATEDON")
+  @Temporal(javax.persistence.TemporalType.TIMESTAMP)
   private java.util.Date createdOn;
   @XmlElement(name="MODIFIEDON")
+  @Temporal(javax.persistence.TemporalType.TIMESTAMP)
   private java.util.Date modifiedOn;
   @XmlElement(name="CREATEDBY")
   private User createdBy;
-  @XmlElement(name="MODIFIEDBY")
-  private User modifiedBy;  
-  @XmlElement(name="STATE")
- 
-  private String state;  // O open, C closed, S suspended
   
-  @XmlElement(name="BALANCE")
+ @XmlElement(name="MODIFIEDBY")
+  private User modifiedBy;
+  @XmlElement(name="STATE")
+  @Column(name="state",nullable=false,length=1)
+  private String state;  // O open, C closed, S suspended
+   @XmlElement(name="BALANCE")
+  @Column(name="balance",nullable=false)
   private double balance;
-
     /**
      * @return the id
      */
@@ -202,7 +217,6 @@ public class AccountBean implements Serializable{
     public void setBalance(double balance) {
         this.balance = balance;
     }
-  
-  
-  
+
+
 }

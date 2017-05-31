@@ -50,7 +50,7 @@
                                             <c:forEach items="#{accountController.accounts.listaccounts}" var="acc" varStatus="accs" > 
                                                 
                                                 <tr>
-                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'  style="width:5%;">
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'  style="width:2%;">
                                                         <h:outputText value="#{accs.index+1}">
                                                         </h:outputText>
                                                         
@@ -85,7 +85,7 @@
                     
                         var  table=  $('#accountstbl').dataTable({
                         
-                            "autoWidth": false,  
+                            "autoWidth": true,  
                             "sPaginationType": "full_numbers",
                             "destroy":true,
                             "order": [[ 0, 'asc' ]],
