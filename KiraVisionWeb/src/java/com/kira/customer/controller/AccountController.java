@@ -7,12 +7,16 @@ package com.kira.customer.controller;
 
 import com.kira.customer.beans.AccountBean;
 import com.kira.customer.beans.AccountsBean;
+import com.kira.ussd.utilities.CommonLibrary;
 import com.settings.controller.LoginController;
+import java.io.Serializable;
 import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -20,21 +24,38 @@ import javax.faces.context.FacesContext;
  */
 @Stateless
 @SessionScoped
-@ManagedBean(name="account")
-public class AccountController {
+@ManagedBean(name="accountController")
+public class AccountController implements Serializable {
     private String pageTitle;
     private String contentPage;
     private AccountsBean accounts = new AccountsBean();
     AccountBean accountBean=new AccountBean();
     @ManagedProperty(value = "#{login}")
     private LoginController login;
-    public String listaccounts() throws Exception
+    public String haveListofAccounts() throws Exception
     {
+        
+        String url = "http://localhost:8080/KiraVision/account/allaccounts";
+        Response response=CommonLibrary.sendRESTRequest(url, "", MediaType.TEXT_PLAIN, "GET");
+        if(response.getStatus()==200)
+        {
+           try
+           {
+               String xml = response.readEntity(String.class);
+           
+           this.setAccounts((AccountsBean)CommonLibrary.unmarshalling(xml, AccountsBean.class));
+           System.out.println(xml);
+           }
+           catch(Exception e)
+           {
+               System.out.println(e.getMessage());
+           }
+        }
         
         FacesContext.getCurrentInstance().getExternalContext().redirect("/KiraVisionWeb/accounts/accounts.xhtml");
         this.setContentPage("listAccounts.xhtml");
         this.setPageTitle("List of Accounts");
-        System.out.println(getLogin().getLoginUser().getUsername());
+        //System.out.println(getLogin().getLoginUser().getUsername());
         return null;
     }
 

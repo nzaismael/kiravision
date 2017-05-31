@@ -76,20 +76,20 @@
                         <rich:panel header="Account Operations">
                             <h:panelGroup id="accountside">
 
-                                <a4j:commandButton  action="#{account.listAccounts()}" id="listaccountsbutton" class="btn btn-default " style=" width: 100%; text-align: left"  render="listaccountsid" value="List of Accounts"/>
+                                <a4j:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton" class="btn btn-default " style=" width: 100%; text-align: left"  render="listaccountsid" value="List of Accounts"/>
                                 <h:commandButton id="exportentriesbutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Export Account Entries">
-                                    <f:ajax event="click" listener="#{account.exportEntries()}" render="listaccountsid"/>
+                                    <f:ajax event="click" listener="#" render="listaccountsid"/>
                                 </h:commandButton>
                                 <h:commandButton id="operationsbutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Operations">
-                                    <f:ajax event="click" listener="#{account.entryOperations()}" render="listaccountsid"/>
+                                    <f:ajax event="click" listener="#" render="listaccountsid"/>
                                 </h:commandButton>
                                              
                                <h:commandButton id="operationschemabutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Operations Accounting Schema">
-                                    <f:ajax event="click" listener="#{account.exportEntries()}" render="listaccountsid"/>
+                                    <f:ajax event="click" listener="#" render="listaccountsid"/>
                                 </h:commandButton> 
 
                                  <h:commandButton id="bankbutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Banks">
-                                     <f:ajax event="click" listener="#{account.listBanks()}" render="listaccountsid"/>
+                                     <f:ajax event="click" listener="#" render="listaccountsid"/>
                                 </h:commandButton> 
 
                                  
@@ -105,11 +105,11 @@
                         <span class="container-fluid" style="overflow: auto;" >    
                             
                             <div class="container" >
-                                <h4>#{account.pageTitle}</h4>
+                                <h4>#{accountController.pageTitle}</h4>
                                 <div class="panel panel-primary" >
-                                    <div  class="panel-heading" style=" text-align: center;" >#{account.pageTitle}</div>
+                                    <div  class="panel-heading" style=" text-align: center;" >#{accountController.pageTitle}</div>
                                     <div class="panel-body" id="clientprincipals" >
-                                        <ui:include src="#{account.contentPage}"/>
+                                        <ui:include src="#{accountController.contentPage}"/>
                                     </div>
                                 </div>
                             </div>

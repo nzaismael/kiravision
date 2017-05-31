@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -45,13 +46,21 @@ public class AccountBean implements Serializable{
   private String accountOwner; //B bank,P partnerCommissions payable by customers,C money owed to Customers, I Income account 
   // CH check waiting for payment, TR transfers waiting for payment
   @XmlElement(name="CREATEDON")
+  @Temporal(javax.persistence.TemporalType.TIMESTAMP)
   private java.util.Date createdOn;
   @XmlElement(name="MODIFIEDON")
+  @Temporal(javax.persistence.TemporalType.TIMESTAMP)
   private java.util.Date modifiedOn;
   @XmlElement(name="CREATEDBY")
   private User createdBy;
   @XmlElement(name="MODIFIEDBY")
   private User modifiedBy;
+  @XmlElement(name="STATE")
+  @Column(name="state",nullable=false,length=1)
+  private String state;  // O open, C closed, S suspended
+   @XmlElement(name="BALANCE")
+  @Column(name="balance",nullable=false)
+  private double balance;
     /**
      * @return the id
      */
@@ -176,6 +185,34 @@ public class AccountBean implements Serializable{
      */
     public void setModifiedBy(User modifiedBy) {
         this.modifiedBy = modifiedBy;
+    }
+
+    /**
+     * @return the state
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * @param state the state to set
+     */
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    /**
+     * @return the balance
+     */
+    public double getBalance() {
+        return balance;
+    }
+
+    /**
+     * @param balance the balance to set
+     */
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
 

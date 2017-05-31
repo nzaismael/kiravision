@@ -28,14 +28,14 @@ public class LoginController implements Serializable {
    @ManagedProperty(value = "#{navigation}")
     private Navigation navigation;
   @ManagedProperty(value = "#{user}")
-     private User loginUser ;
+     private User loginUser =new User();
      
      public LoginController()
      {
          
      }
      
-    public void authentication() throws Exception
+    public void authentication() 
     {
        // getLoginUser().
      String loginUrl ="http://localhost:8080/KiraVision/users/login/"+getLoginUser().getUserId()+"/"+getLoginUser().getUserPin();
@@ -45,15 +45,23 @@ public class LoginController implements Serializable {
     navigation.setCurrentPage(null);
     if(status==200)
     {
-        String xmlresponse = response.readEntity(String.class);
+       try
+       {
+           String xmlresponse = response.readEntity(String.class);
+      
        System.out.println(xmlresponse);
        this.setLoginUser((User)CommonLibrary.unmarshalling(xmlresponse, User.class));
          navigation.setCurrentPage("mainMenu/menus.xhtml");
-        // System.out.println(this.getLoginUser().getUsername());
+         System.out.println(this.getLoginUser().getUserId());
+       }
+       catch(Exception e)
+       {
+           System.out.println(e.getMessage());
+       
     }
    
         
-   
+    } 
     
     }
 

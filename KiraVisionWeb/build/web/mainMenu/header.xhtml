@@ -25,7 +25,7 @@
         <div class="container-fluid" style="margin:0px;padding:0px;">
             <div style="height:65px;font-family:ubuntu;margin:0px;padding:0px;">
                 <div class="col-xs-4"> <img src="http://localhost:8080/KiraVisionWeb/design/images/logo1.png"  alt="No logo" class="img-responsive"/></div>
-                <div class="col-xs-3" style="text-align: center">#{user.username} #{user.userSurname} </div>
+                <div class="col-xs-3" style="text-align: center"><span class="label label-primary">#{login.loginUser.userSurname} #{login.loginUser.username}</span></div>
                 <div class="col-xs-5" style="margin:0px;padding:0px;line-height:60px;text-align:right;font-size:30px;color:#0053a5;"><strong class="hidden-xs">KIRA VISION MIS</strong> <a href="#" class="logout">Logout</a></div>
             </div>
         </div>
@@ -46,7 +46,7 @@
                 
                   <!--<a id="customersId"  href="/HealthInsuranceWeb/faces/customers/customers.xhtml" class="omenu col-xs-1 " >Partners</a> -->
                   <a4j:commandLink id="agentsId" action="#{agent.listCommercialAgents()}" class="omenu col-xs-2"> <h:outputText value="Commercial Agents"/>   </a4j:commandLink>
-                      <a4j:commandLink id="accountsId" action="#{account.listaccounts()}" class="omenu col-xs-1">Accounts</a4j:commandLink>
+                  <a4j:commandLink id="accountsId" action="#{accountController.haveListofAccounts()}" class="omenu col-xs-1">Accounts</a4j:commandLink>
                 
                     <a id="policesId" href="/HealthInsuranceWeb/faces/police/listPolices.xhtml" class="omenu active col-xs-1">Reports</a>
                  <a id="settingsId" href="/HealthInsuranceWeb/faces/settings/settingsindex.xhtml" class="omenu col-xs-1">Settings</a>

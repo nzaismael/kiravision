@@ -25,9 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="user")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User implements Serializable {
-
-   
-  @Id
+ @Id
   @Column(length=30,nullable=false)
 private String userId; 
   @Column(length=60,nullable=false)

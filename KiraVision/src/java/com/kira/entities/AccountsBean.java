@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.kira.customer.beans;
+package com.kira.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,21 +21,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class AccountsBean implements Serializable{
     @XmlElement(name="ACCOUNT")
-    private List<AccountBean> listaccounts = new ArrayList<>();
+    private List<AccountBean> accounts = new ArrayList<>();
 
     /**
-     * @return the listaccounts
+     * @return the accounts
      */
-    public List<AccountBean> getListaccounts() {
-        return listaccounts;
+    public List<AccountBean> getAccounts() {
+        return accounts;
     }
 
     /**
-     * @param listaccounts the listaccounts to set
+     * @param accounts the accounts to set
      */
-    public void setListaccounts(List<AccountBean> listaccounts) {
-        this.listaccounts = listaccounts;
+    public void setAccounts(List<AccountBean> accounts) {
+        this.accounts = accounts;
     }
-
+    
     
 }

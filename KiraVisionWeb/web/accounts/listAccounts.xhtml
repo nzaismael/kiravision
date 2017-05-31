@@ -31,7 +31,7 @@
     
     
     <h:body>
-        
+        <h:form>
         <button type="button" class="btn  btn-primary btn-sm" data-toggle="modal" data-target="#newaccountModal">+New Account</button>
         <hr></hr>   
         
@@ -47,7 +47,7 @@
                                             </tr>
                                         </thead>
                                         <tbody class='row'> 
-                                            <c:forEach items="#{account.accounts.accounts}" var="acc" varStatus="accs" >
+                                            <c:forEach items="#{accountController.accounts.listaccounts}" var="acc" varStatus="accs" > 
                                                 
                                                 <tr>
                                                     <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'  style="width:5%;">
@@ -66,7 +66,7 @@
                                                 
                                                 
                                                 
-                                            </c:forEach>
+                                            </c:forEach> 
                                             
                                             
                                         </tbody> 
@@ -110,7 +110,7 @@
         
         
       
-      
+     </h:form> 
     </h:body>
 </html>
 

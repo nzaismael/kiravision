@@ -29,6 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(com.kira.services.AccountREST.class);
         resources.add(com.kira.services.CardHolderREST.class);
         resources.add(com.kira.services.CommercialAgentREST.class);
         resources.add(com.kira.services.MerchantREST.class);
