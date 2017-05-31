@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title>Facelet Title</title>
+         <style>
+            .alert{
+  display:none;
+}
+        </style>
+        
+        <script type="text/javascript">
+           function showalert()
+           {
+               $('.alert').show();
+           }
+            
+        </script>
+        
+    </h:head>
+    <h:body>
+        
+        <span class="label label-primary lightcase-icon-play ">
+            Creating a new Bank
+        </span>
+        <hr></hr>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="bankid" value="Bank Id: "/>
+                <h:inputText value="#{account.bank.bankId}"  id="bankid" size="6"/>
+                <h:outputLabel for="banknameid" value="Bank Name"/>
+                <h:inputText value="#{account.bank.bankName}"  id="banknameid" size="60"/>
+                <h:outputLabel for="bankabbrid" value="Bank Short Name:"/>
+                <h:inputText value="#{account.bank.shortName}"  id="bankabbrid"  />
+                <h:outputLabel for="bankaccid" value="Internal Account Number:"/>
+                <h:inputText value="#{account.bank.internalAccountNumber}"  id="bankaccid"  size="20"/>
+            </h:panelGrid>
+            <br></br>
+            <a4j:commandButton action="#{account.addBank()}"  value="Create Account" oncomplete="javascript:showalert()" render="alertarea bankstbl"/>
+             
+        </h:form>
+        
+        <h:panelGroup id="alertarea">
+        <div class="alert #{account.resultClass}">
+
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+   #{account.resultMessage}
+        </div>
+     </h:panelGroup>       
+            
+        <script>
+  $(document).ready(function(){
+   
+        $('.alert').hide()
+   
+});    
+</script>
+    </h:body>
+</html>
+

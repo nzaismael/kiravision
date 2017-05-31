@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:a4j="http://richfaces.org/a4j">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Kira Vision</title>
+            
+    </h:head>    
+        
+        
+    <h:body>
+        
+        
+        <!-- HEADER -->
+            
+        <!-- Top -->
+        <div class="container-fluid" style="margin:0px;padding:0px;">
+            <div style="height:65px;font-family:ubuntu;margin:0px;padding:0px;">
+                <div class="col-xs-4"> <img src="http://localhost:8080/KiraVisionWeb/design/images/logo1.png"  alt="No logo" class="img-responsive"/></div>
+                <div class="col-xs-3" style="text-align: center">#{user.username} #{user.userSurname} </div>
+                <div class="col-xs-5" style="margin:0px;padding:0px;line-height:60px;text-align:right;font-size:30px;color:#0053a5;"><strong class="hidden-xs">KIRA VISION MIS</strong> <a href="#" class="logout">Logout</a></div>
+            </div>
+        </div>
+        <!-- End Top -->
+            
+            
+        <!-- Navbar -->
+        <nav class="navbar navbar-default hidden-xs" style="background-color:#ffffff;height:70px;font-family:ubuntu;color:#ffffff;text-align:center;padding-bottom:0px;margin-bottom:0px;border-bottom:5px solid #0053a5;border-radius:0px;">
+            <div class="container-fluid">
+                <div class="col-xs-12" style="margin:0px;padding:0px;border:0px solid red;">
+                    <h:form>
+                    
+                    <a id="dashboardId" href="/KiraVisionWeb/dashboard/dashboard.xhtml" class="omenu col-xs-1" >Dashboard</a>
+                    
+                    <a4j:commandLink id="customerId" action="#{customer.listCustomers()}" class="omenu col-xs-1">Customers</a4j:commandLink>
+                  <!--  <a id="serviceProviderId"  href="/KiraVisionWeb/customer/customerIndex.xhtml" class="omenu col-xs-1" >Customers</a> -->
+                  <a4j:commandLink id="partnerId" action="#{partner.listPartners()}" class="omenu col-xs-1">Partners</a4j:commandLink>
+                
+                  <!--<a id="customersId"  href="/HealthInsuranceWeb/faces/customers/customers.xhtml" class="omenu col-xs-1 " >Partners</a> -->
+                  <a4j:commandLink id="agentsId" action="#{agent.listCommercialAgents()}" class="omenu col-xs-2"> <h:outputText value="Commercial Agents"/>   </a4j:commandLink>
+                      <a4j:commandLink id="accountsId" action="#{account.listaccounts()}" class="omenu col-xs-1">Accounts</a4j:commandLink>
+                
+                    <a id="policesId" href="/HealthInsuranceWeb/faces/police/listPolices.xhtml" class="omenu active col-xs-1">Reports</a>
+                 <a id="settingsId" href="/HealthInsuranceWeb/faces/settings/settingsindex.xhtml" class="omenu col-xs-1">Settings</a>
+                 </h:form>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+            
+            
+            
+            
+        <!-- MobileMenu -->
+        <nav id="myNavbar" class="navbar navbar-default visible-xs hidden-sm hidden-md hidden-lg" style="text-align:left;margin-top:5px;" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only"> </span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">MENU</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Menu 0 </a></li>
+                            
+                        <li><a href="#">Menu 1 </a></li>
+                            
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Menu 2 <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Submenu 1</a></li>
+                                <li><a href="#">Submenu 2</a></li>
+                                <li><a href="#">Submenu 3</a></li>
+                                <li><a href="#">Submenu 4</a></li>
+                                <li><a href="#">Submenu 5</a></li>
+                                <li><a href="#">Submenu 6</a></li>
+                            </ul>
+                        </li>
+                            
+                        <li><a href="#">Menu 3 </a></li>
+                            
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Menu 4 <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Submenu 1</a></li>
+                                <li><a href="#">Submenu 2</a></li>
+                                <li><a href="#">Submenu 3</a></li>
+                                <li><a href="#">Submenu 4</a></li>
+                                <li><a href="#">Submenu 5</a></li>
+                                <li><a href="#">Submenu 6</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div>
+        </nav>
+        <!-- End MobileMenu -->
+            
+            
+            
+            
+        <!-- End HEADER-->
+            
+            
+            
+            
+            
+    </h:body>
+</html>

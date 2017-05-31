@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <script type=" text/javascript">
+            function openNewOperationModal()
+            {
+                
+            }
+            
+        </script>
+        
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+       
+        <button type="button" class="btn  btn-primary btn-sm" data-toggle="modal" data-target="#newoperationModal">+New Operation</button>
+       <!-- <a4j:commandButton class="btn  btn-primary btn-sm" value="+New Operation" />-->
+        <hr></hr> 
+        <p:separator/>
+        
+       
+        
+        
+          <h:panelGroup id="newOperation">
+              
+       <div class="modal fade" id="newoperationModal" role="dialog">
+            <div class="modal-dialog modal-dialog">
+                
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">New account operation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ui:include src="newOperation.xhtml"/>
+                      </div>
+                    <div class="modal-footer bg-primary">
+                        <i> At Radiant, a promise is a promise</i>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+                    
+         <table class="table table-hover table-striped" id="accountoperationstbl" >
+                                        <thead>
+                                            <tr>
+                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Counter</th>
+                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Id</th>
+                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Operation Description</th>
+                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'></th>
+                                                
+                                               
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody class='row'> 
+                                            <c:forEach items="#{account.accountOperations.operations}" var="op" varStatus="ops" >
+                                                
+                                                <tr>
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'  style="width:5%;">
+                                                        <h:outputText value="#{ops.index+1}">
+                                                        </h:outputText>
+                                                        
+                                                    </td>
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{op.id}</td>
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{op.description}</td>
+                                                    <td>       
+                                                <a4j:commandLink class="btn" value="Accounting Schema" action="#" oncomplete="#{rich:component('schema')}.show(); return false;"></a4j:commandLink>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </c:forEach>
+                                            
+                                            
+                                        </tbody> 
+                                        
+                                        
+                                    </table>
+                                    
+                                    
+                             
+                                
+                                
+                        
+                        
+                 
+                    <script type="text/javascript">
+                    
+                        var  table=  $('#accountstbl').dataTable({
+                        
+                            "autoWidth": false,  
+                            "sPaginationType": "full_numbers",
+                            "destroy":true,
+                            "order": [[ 0, 'asc' ]],
+                            "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]]
+                        
+                        
+                        } );
+                    
+                    
+                    
+                    
+                    </script>  
+        
+        
+        
+        
+        
+         
+              
+              
+      </h:panelGroup>
+       
+    </h:body>
+</html>
+

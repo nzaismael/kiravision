@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+    <h:head>
+        <title>Facelet Title</title>
+  
+        <style>
+
+
+</style>
+    </h:head>
+    <h:body>
+       
+        <h:form>
+         
+               <table><tr>
+                       <td>Name: </td><td> <h:inputText  value="#{partner.merchant.merchantName}" p:placeholder="Partner Name"/></td></tr>
+                       <tr><td>Surname:</td><td> <h:inputText  value="#{partner.merchant.merchantSurname}" p:placeholder="Partner Surname"/></td></tr>
+                       <tr><td>Phone Number:</td><td> <h:inputText  value="#{partner.merchant.merchantPhone}" p:placeholder="Partner Phone"/></td></tr>
+                       <tr><td>Email:</td><td> <h:inputText  value="#{partner.merchant.merchantEmail}" p:placeholder="Partner Email"/></td></tr>
+                       <tr><td>Description:</td><td>  
+                               <h:inputTextarea cols="20" rows="4" value="#{partner.merchant.merchantDescription}" p:placeholder="Comments on Partner"/>
+                               </td></tr>
+                        <tr><td>Physical Address:</td><td>  
+                               <h:inputTextarea cols="20" rows="4" value="#{partner.merchant.merchantLocation}" p:placeholder="Physical Address"/>
+                               </td></tr>
+                          
+                       
+                       <tr >
+                               <td colspan="2">
+                                   <h:commandButton  value="Save Merchant Pertner" class="btn btn-primary"   >
+                                       <a4j:ajax execute="@form" render="@form,:refreshdata" listener="#{partner.addNewPartner()}"  immediate="false"/>
+                                   </h:commandButton>
+                                   
+                               </td>
+                           </tr>
+               </table>
+               
+</h:form>
+           
+      
+    </h:body>
+</html>
+

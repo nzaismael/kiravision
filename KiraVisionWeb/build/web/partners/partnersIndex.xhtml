@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+        <h:head>
+        
+    <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    
+    <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
+    
+    <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+        <link href="../design/css/chosen.css" rel="stylesheet" type="text/css"/>
+   </h:head>
+    <h:body>
+        
+        <ui:include src="../mainMenu/header.xhtml"/>
+        
+        <div class="container-fluid" >
+            <div class="row content col-sm-12" >
+                <div class="col-sm-3 sidenav" style=" overflow-x:  scroll;">
+                    
+                        <rich:panel header="#{partner.leftPageTitle}">
+                            <h:panelGroup id="partnerside">
+
+                                <ui:include src="#{partner.leftPage}"/>
+                                            
+                                 
+                            </h:panelGroup>
+                        </rich:panel>
+                   
+                </div>
+                
+                
+                <div class="col-sm-9">
+               
+                    <h:panelGroup id="listpartnerssid">   
+                        <span class="container-fluid" style="overflow: auto;" >    
+                            
+                            <div class="container" >
+                                <p:commandLink value="New Partner" action='#{partner.leftNavigation("newPartner.xhtml", "New Kira Vision Partner")}' update="partnerside"/>
+                                <div class="panel panel-primary" >
+                                    <div  class="panel-heading" style=" text-align: center;" >List of Kira Vision Partners</div>
+                                    <div class="panel-body" id="clientprincipals" >
+                                        <ui:include src="listPartners.xhtml"/>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </span> 
+                    </h:panelGroup>  
+                    
+                    
+                </div>
+                
+            
+                         
+        
+                
+                
+                
+         
+                
+                
+            </div>
+        </div>
+        
+        
+        
+       
+        
+        
+        
+        
+        
+     
+        
+        <!-- end of calculating premium for principal member -->
+        
+        
+        
+       
+          
+        
+ </h:body>       
+    
+</html>
+

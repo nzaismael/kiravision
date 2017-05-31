@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
+    
+    <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+        <link href="../design/css/chosen.css" rel="stylesheet" type="text/css"/>
+       
+          <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="../design/js/chosen.jquery.min.js" type="text/javascript"></script>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+        <script>
+                  
+        </script>
+    </h:head>
+    <h:body>
+
+
+        <h:form>
+
+
+
+<h:panelGroup id="agentData">
+                    <div class="col-xs-12 col-sm-12 holderbox">
+                        
+                        <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:300px;">
+                            
+                            <span class="container-fluid" style="overflow: auto;">
+                                <h:panelGroup >
+                                    <table class="table table-hover table-striped" id="serviceproviderstb" >
+                                        <thead>
+                                            <tr>
+                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1 ' >Counter</th>
+                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1' >Id</th>
+                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1' width="50">Agent Names</th>
+                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Telephone</th>
+                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Email</th>
+                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Recruitment Date</th>
+                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>-</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody class='row'> 
+                                            <c:forEach items="#{agent.commercialAgents.agents}" var="cu" varStatus="cus" >
+                                                     
+                                                <tr>
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'  style="width:5%;">
+                                                        <h:outputText value="#{cus.index+1}">
+                                                        </h:outputText>
+                                                        
+                                                    </td>
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{cu.agentId}</td>
+                                                    
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{cu.agentName} #{cu.agentSurname}</td>
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{cu.agentPhone}</td>
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{cu.agentEmail}</td>
+                                                    
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>
+                                                        <h:outputText value="#{cu.createdOn}">
+                                                         <f:convertDateTime pattern="dd, MMM, yyyy"/>
+                                                        </h:outputText>
+                                                    
+                                                    </td>
+                                                    
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>[<p:commandLink value="Details" class="text-success" />]
+                                                       [<a4j:commandLink  value="Edit"/>]
+                                                       [<a4j:commandLink value="Transactions"/>]
+                                                        [<a4j:commandLink value="Card Details"/>]
+                                                    
+                                                    </td>   
+                                                    
+                                                </tr>
+                                            
+                                   </c:forEach>
+                                                
+                                                            
+                                                
+                                                
+                                          
+                                            
+                                            
+                                        </tbody> 
+                                       
+                                        
+                                    </table>
+                                    
+                                    
+                                </h:panelGroup>
+                                
+                                
+                            </span>
+                        </div>
+                        
+                    </div>
+                    <script type="text/javascript">
+                   
+                        var  table=  $('#serviceproviderstb').dataTable({
+                           "autoWidth": false, 
+                           "sPaginationType": "full_numbers",
+                            "destroy":true,
+                            "order": [[ 0, 'asc' ]],
+                            "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
+                            "columnDefs": [
+         { 
+        "width": "25%", "targets": 6
+       
+            }
+            ]
+                          
+                        } );
+                        
+                    table.colmuns.adjust().draw();
+                    
+                    
+                    
+                    </script>
+                    
+                </h:panelGroup>  
+        
+        
+   </h:form>
+        
+    </h:body>
+</html>
+

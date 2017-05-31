@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+   <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Kira Vision Company</title>
+         <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
+    
+    <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    
+        <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     
+        <style>
+            .aligntop td {
+                vertical-align: top;
+            }
+        </style>
+        <h:outputStylesheet>
+            .top {
+            vertical-align: top;
+            }
+            
+            .info {
+            height: 202px;
+            overflow: auto;
+            }
+        </h:outputStylesheet>
+        <style>
+            /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+            .row.content {height: 1500px}
+            
+            /* Set gray background color and 100% height */
+            .sidenav {
+                background-color: #f1f1f1;
+                height: 100%;
+            }
+            
+            /* Set black background color, white text and some padding */
+            footer {
+                background-color: #555;
+                color: white;
+                padding: 15px;
+            }
+            
+            /* On small screens, set height to 'auto' for sidenav and grid */
+            @media screen and (max-width: 767px) {
+                .sidenav {
+                    height: auto;
+                    padding: 15px;
+                }
+                .row.content {height: auto;} 
+            }
+        </style>
+        
+        
+    </h:head>
+    <h:body>
+        
+        <ui:include src="../mainMenu/header.xhtml"/>
+        
+        <div class="container-fluid" >
+            <div class="row content col-sm-12" >
+                <div class="col-sm-3 sidenav" style=" overflow-x:  scroll;">
+                    <h:form id="sidecli">
+                        <rich:panel header="Account Operations">
+                            <h:panelGroup id="accountside">
+
+                                <a4j:commandButton  action="#{account.listAccounts()}" id="listaccountsbutton" class="btn btn-default " style=" width: 100%; text-align: left"  render="listaccountsid" value="List of Accounts"/>
+                                <h:commandButton id="exportentriesbutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Export Account Entries">
+                                    <f:ajax event="click" listener="#{account.exportEntries()}" render="listaccountsid"/>
+                                </h:commandButton>
+                                <h:commandButton id="operationsbutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Operations">
+                                    <f:ajax event="click" listener="#{account.entryOperations()}" render="listaccountsid"/>
+                                </h:commandButton>
+                                             
+                               <h:commandButton id="operationschemabutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Operations Accounting Schema">
+                                    <f:ajax event="click" listener="#{account.exportEntries()}" render="listaccountsid"/>
+                                </h:commandButton> 
+
+                                 <h:commandButton id="bankbutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Banks">
+                                     <f:ajax event="click" listener="#{account.listBanks()}" render="listaccountsid"/>
+                                </h:commandButton> 
+
+                                 
+                            </h:panelGroup>
+                        </rich:panel>
+                    </h:form>
+                </div>
+                
+                
+                <div class="col-sm-9">
+               
+                    <h:panelGroup id="listaccountsid">   
+                        <span class="container-fluid" style="overflow: auto;" >    
+                            
+                            <div class="container" >
+                                <h4>#{account.pageTitle}</h4>
+                                <div class="panel panel-primary" >
+                                    <div  class="panel-heading" style=" text-align: center;" >#{account.pageTitle}</div>
+                                    <div class="panel-body" id="clientprincipals" >
+                                        <ui:include src="#{account.contentPage}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </span> 
+                    </h:panelGroup>  
+                    
+                    
+                </div>
+                
+              <!-- new Account Modal -->  
+           <div class="modal fade" id="newaccountModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">New Account Creation </h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <iframe src="newAccount.xhtml" style="zoom:0.60" width="99.6%" height="900" frameborder="0"></iframe>
+                    </div>
+                    <div class="modal-footer bg-primary">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+                  
+        <!-- end of new Account Modal-->
+               <!-- new bank modal--> 
+                
+                     <div class="modal fade" id="newbankModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">New Account Creation </h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <iframe src="newbank.xhtml" style="zoom:0.60" width="99.6%" height="900" frameborder="0"></iframe>
+                    </div>
+                    <div class="modal-footer bg-primary">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+      <!-- end of new bank modal-->            
+        
+                
+                
+                
+         
+                
+                
+            </div>
+        </div>
+        
+        
+        
+        <rich:popupPanel id="progress1" autosized="true">
+            <h:graphicImage value="../images/ajax_progress.gif" alt="Finding Transactions " />
+            
+        </rich:popupPanel>   
+        
+        
+        
+        
+        
+        
+         <link href="../css/style.css" rel="stylesheet" type="text/css"/>
+         <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="../js/jquery-1-12.23.js" type="text/javascript"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+       
+        
+        
+        <!-- end of calculating premium for principal member -->
+        
+        
+        
+        
+        <footer class="container-fluid">
+            <p>Radiant Insurance Company</p>
+        </footer>   
+        
+ </h:body>       
+    
+</html>
+
