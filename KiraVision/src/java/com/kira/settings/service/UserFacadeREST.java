@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import com.kira.settings.ejb.*;
+import com.kira.settings.entities.AccountTypes;
 import com.kira.settings.entities.BanksBean;
 import com.kira.settings.entities.CurrenciesBean;
 import java.util.List;
@@ -32,6 +33,8 @@ public class UserFacadeREST {
 private CurrencyEjb currencyEjb;
 @EJB
 private BankEjb bankEjb;
+@EJB
+AccountTypeEjb accountTypeEjb;
 
     @Path("list")
     @GET
@@ -97,6 +100,19 @@ public BanksBean returnBanks()
     BanksBean bb = new BanksBean();
     bb.setBanks(bankEjb.allBanks());
     return bb;
+  
+}
+
+@Path("type/accounttypes")
+@GET
+@Produces({MediaType.APPLICATION_XML})
+public AccountTypes accountTypes()
+{
+    
+    //System.out.println(this.getCurrencyEjb().listCurrencies().size());
+    AccountTypes ats = new AccountTypes();
+    ats.setAccounttypes(accountTypeEjb.allAccountTypes());
+    return ats;
   
 }
 

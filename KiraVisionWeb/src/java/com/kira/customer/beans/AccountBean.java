@@ -6,6 +6,9 @@
 package com.kira.customer.beans;
 
 
+import com.settings.beans.AccountType;
+import com.settings.beans.BankBean;
+import com.settings.beans.CurrencyBean;
 import com.settings.beans.User;
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -19,7 +22,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -64,6 +66,15 @@ public class AccountBean implements Serializable{
    @XmlElement(name="BALANCE")
   @Column(name="balance",nullable=false)
   private double balance;
+   
+   @XmlElement(name="BANK")
+   private BankBean bank;
+   @XmlElement(name="CURRENCY")
+   private CurrencyBean currency;
+   
+   @XmlElement(name="ACCOUNTSCHEMA")
+   private AccountType accountSchema;
+   
     /**
      * @return the id
      */
@@ -216,6 +227,48 @@ public class AccountBean implements Serializable{
      */
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    /**
+     * @return the bank
+     */
+    public BankBean getBank() {
+        return bank;
+    }
+
+    /**
+     * @param bank the bank to set
+     */
+    public void setBank(BankBean bank) {
+        this.bank = bank;
+    }
+
+    /**
+     * @return the currency
+     */
+    public CurrencyBean getCurrency() {
+        return currency;
+    }
+
+    /**
+     * @param currency the currency to set
+     */
+    public void setCurrency(CurrencyBean currency) {
+        this.currency = currency;
+    }
+
+    /**
+     * @return the accountSchema
+     */
+    public AccountType getAccountSchema() {
+        return accountSchema;
+    }
+
+    /**
+     * @param accountSchema the accountSchema to set
+     */
+    public void setAccountSchema(AccountType accountSchema) {
+        this.accountSchema = accountSchema;
     }
 
 

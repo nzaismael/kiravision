@@ -5,6 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:rich="http://richfaces.org/rich"
       xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <link href="../css/style.css" rel="stylesheet" type="text/css"/>
@@ -24,20 +25,35 @@
         <hr></hr>
         <h:form>
             <h:panelGrid columns="2">
-                <h:outputLabel for="code" value="Code : "/>
-                <h:inputText value="#{account.accountBean.accountOwner}"  id="code"/>
-                <h:outputLabel for="accountNumber" value="Account Number: "/>
+               
+               <p:outputLabel for="accountNumber" value="Account Number: " />
                 <h:inputText value="#{account.accountBean.accountNumber}"  id="accountNumber"/>
            
-                
-                <h:outputLabel for="accountdesc" value="Account Description "/>
+          
+                <p:outputLabel for="accountdesc" value="Account description " />
                 <h:inputTextarea value="#{account.accountBean.accountDescription}" cols="60" rows="5" id="accountdesc"/>
+                
+      
+              
+                
+                <h:outputLabel for="accounttype1" value="Account Type"/>
+                <h:selectOneMenu id ="accounttype1" value="#{accountController.accountBean.accountSchema}"   >
+                  <f:ajax execute="@this"  listener="#{accountController.changeAccountType}" />
+                    <f:selectItem itemValue="#{null}" itemLabel="--select--" />
+                    <f:selectItems value="#{accountController.accountSchemas.accounttypes}" var="as"
+                                   itemLabel="#{as.description}" itemValue="#{as}" > 
+                    
+                    </f:selectItems>
+                   
+   		</h:selectOneMenu> 
+                
+                
             </h:panelGrid>
             
          
             <br></br>
             <h:panelGrid columns="1">
-            <a4j:commandButton action="#{account.createNewAccount()}"  value="Create Account"/>
+                <h:commandButton action="#{accountController.saveAccount()}"  value="Create Account"/>
        </h:panelGrid>
         </h:form>
     </h:body>
