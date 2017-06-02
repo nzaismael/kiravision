@@ -6,6 +6,8 @@
 package com.kira.settings.ejb;
 
 import com.kira.settings.entities.BankBean;
+import com.kira.settings.entities.CurrencyBean;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,5 +27,18 @@ public class BankEjb {
       Query q = em.createQuery("select b from BankBean b  ");
       return q.getResultList();
   }
-    
+
+  public BankBean findBank(int id)
+  {
+      Query q = em.createQuery("select cu from BankBean cu where cu.id=:id");
+        q.setParameter("id", id);
+        List<BankBean> curs = new ArrayList<>();
+        curs=q.getResultList();
+        if(curs.size()>0)
+                {
+                    return curs.get(0);
+                }
+        else
+            return null;
+  }
 }

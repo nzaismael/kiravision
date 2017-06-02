@@ -36,7 +36,8 @@ public class AccountREST {
     @Path("createAccount")
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    public boolean createNewAccount(AccountBean ab)
+    @Produces(MediaType.APPLICATION_XML)
+    public AccountBean createNewAccount(AccountBean ab)
     {
        return  accountEjb.createNewAccount(ab);
       

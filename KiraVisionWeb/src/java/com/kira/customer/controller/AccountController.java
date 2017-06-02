@@ -18,7 +18,9 @@ import com.settings.controller.LoginController;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -50,6 +52,31 @@ public class AccountController implements Serializable {
      
     @ManagedProperty(value = "#{login}")
     private LoginController login;
+    @PostConstruct
+    public void  AccountControllerInit()
+    {
+       // list currencies
+        String urlcurrency="http://localhost:8080/KiraVision/users/currency/allCurrencies";
+        Response rescur = CommonLibrary.sendRESTRequest(urlcurrency, "", MediaType.TEXT_PLAIN, "GET");
+        String xmlCurrency = rescur.readEntity(String.class);
+        setCurrencies((CurrenciesBean)CommonLibrary.unmarshalling(xmlCurrency, CurrenciesBean.class));
+        
+      /// listing Banks
+      String urlbank="http://localhost:8080/KiraVision/users/bank/allBanks";
+        Response resban = CommonLibrary.sendRESTRequest(urlbank, "", MediaType.TEXT_PLAIN, "GET");
+        String xmlbank = resban.readEntity(String.class);
+        setBanks((BanksBean)CommonLibrary.unmarshalling(xmlbank, BanksBean.class));
+         
+        /// Account Types
+        
+     String urltype="http://localhost:8080/KiraVision/users/type/accounttypes";
+     Response restypes = CommonLibrary.sendRESTRequest(urltype, "", MediaType.TEXT_PLAIN, "GET");
+        String xmltype = restypes.readEntity(String.class);
+        setAccountSchemas((AccountTypes)CommonLibrary.unmarshalling(xmltype, AccountTypes.class));
+        
+          
+    }
+    
     public String haveListofAccounts() throws Exception
     {
         
@@ -69,26 +96,7 @@ public class AccountController implements Serializable {
         this.setContentPage("listAccounts.xhtml");
         this.setPageTitle("List of Accounts");
         
-        // list currencies
-        String urlcurrency="http://localhost:8080/KiraVision/users/currency/allCurrencies";
-        Response rescur = CommonLibrary.sendRESTRequest(urlcurrency, "", MediaType.TEXT_PLAIN, "GET");
-        String xmlCurrency = rescur.readEntity(String.class);
-        setCurrencies((CurrenciesBean)CommonLibrary.unmarshalling(xmlCurrency, CurrenciesBean.class));
-        
-      /// listing Banks
-      String urlbank="http://localhost:8080/KiraVision/users/bank/allBanks";
-        Response resban = CommonLibrary.sendRESTRequest(urlbank, "", MediaType.TEXT_PLAIN, "GET");
-        String xmlbank = resban.readEntity(String.class);
-        setBanks((BanksBean)CommonLibrary.unmarshalling(xmlbank, BanksBean.class));
-         
-        /// Account Types
-        
-     String urltype="http://localhost:8080/KiraVision/users/type/accounttypes";
-     Response restypes = CommonLibrary.sendRESTRequest(urltype, "", MediaType.TEXT_PLAIN, "GET");
-        String xmltype = restypes.readEntity(String.class);
-        setAccountSchemas((AccountTypes)CommonLibrary.unmarshalling(xmltype, AccountTypes.class));
-        
-        
+       
       
         //System.out.println(getLogin().getLoginUser().getUsername());
         return null;
@@ -96,16 +104,89 @@ public class AccountController implements Serializable {
   
 public void changeAccountType(AjaxBehaviorEvent event)
 {
-    
-    System.out.println("value changed is being processed. ");
+  try
+  {
+    String urlaccountType = "http://localhost:8080/KiraVision/users/type/accounttypes/"+this.getAccountSchema().getId();
+    Response response =CommonLibrary.sendRESTRequest(urlaccountType, "", MediaType.APPLICATION_XML, "GET");
+    String xml = response.readEntity(String.class);
+    AccountType acc = new AccountType();
+    acc=(AccountType)CommonLibrary.unmarshalling(xml, AccountType.class);
+    if(acc!=null)
+    {
+    this.setAccountSchema(acc);
+    }
+    else
+    {
+        this.setAccountSchema(new AccountType());
+    }
+  }
+  catch(Exception e)
+  {
+      System.out.println(e.getMessage());
+  }
     
 }
 
-public void saveAccount()
+public String saveAccount()
 {
-    
+  this.accountBean.setAccountSchema(this.getAccountSchema());
+  
+  String urlbank = "http://localhost:8080/KiraVision/users/bank/allBanks/"+this.getBank().getId();
+    Response response =CommonLibrary.sendRESTRequest(urlbank, "", MediaType.APPLICATION_XML, "GET");
+    String xml = response.readEntity(String.class);
+    BankBean bb = new BankBean();
+    bb=(BankBean)CommonLibrary.unmarshalling(xml, BankBean.class);
+    if(bb!=null)
+    {
+    this.setBank(bb);
+    }
+    else
+    {
+        this.setBank(null);
+    }
+  String urlcurrency = "http://localhost:8080/KiraVision/users/currency/allCurrencies/"+this.getCurrency().getId();
+    Response response1 =CommonLibrary.sendRESTRequest(urlcurrency, "", MediaType.APPLICATION_XML, "GET");
+    String xml1 = response1.readEntity(String.class);
+    CurrencyBean cb = new CurrencyBean();
+    cb=(CurrencyBean)CommonLibrary.unmarshalling(xml1, CurrencyBean.class);
+    if(cb!=null)
+    {
+    this.setCurrency(cb);
+    }
+    else
+    {
+        this.setCurrency(null);
+    }
+     
+    this.accountBean.setBank(this.getBank());
+    this.accountBean.setCurrency(this.getCurrency());
+    this.accountBean.setState("O");
+    this.accountBean.setBalance(0);
+    this.accountBean.setCreatedBy(login.getLoginUser());
+    this.accountBean.setModifiedBy(login.getLoginUser());
+    String accountxml =CommonLibrary.marchalling(this.accountBean, AccountBean.class);
+  String accountsaveUrl ="http://localhost:8080/KiraVision/account/createAccount";
+  System.out.println(accountxml);
+  Response responsesave =CommonLibrary.sendRESTRequest(accountsaveUrl, accountxml, MediaType.APPLICATION_XML, "POST");
+  String respxml;
+  respxml =responsesave.readEntity(String.class);
+  AccountBean ab = new AccountBean();
+  ab =(AccountBean) CommonLibrary.unmarshalling(respxml, AccountBean.class);
+  if(ab.getAccountNumber()!=null)
+  {
+      this.accounts.getListaccounts().add(0,ab);
+       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "Account number "+ab.getAccountNumber()+"  has been created"));
+ 
+  }
+  else
+  {
+     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error!", "Account could not be created. See the System administrator"));
+   
+  }
+  return null;
 }
-    
+   
+
     /**
      * @return the pageTitle
      */

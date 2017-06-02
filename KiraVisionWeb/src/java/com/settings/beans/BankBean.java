@@ -32,6 +32,7 @@ public class BankBean implements Serializable{
     
     private String bankshot;
     private String bankFull;
+    private String bankAccount;
 
     /**
      * @return the id
@@ -73,6 +74,20 @@ public class BankBean implements Serializable{
      */
     public void setBankFull(String bankFull) {
         this.bankFull = bankFull;
+    }
+
+    /**
+     * @return the bankAccount
+     */
+    public String getBankAccount() {
+        return bankAccount;
+    }
+
+    /**
+     * @param bankAccount the bankAccount to set
+     */
+    public void setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
     }
     
     

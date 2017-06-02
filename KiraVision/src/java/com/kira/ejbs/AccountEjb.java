@@ -23,15 +23,24 @@ public class AccountEjb {
     @PersistenceContext
     EntityManager em;
     
-   public boolean createNewAccount(AccountBean ab){
+   public AccountBean createNewAccount(AccountBean ab){
+       
        try
        {
+       ab.setCreatedOn(new java.util.Date());
+       ab.setModifiedOn(new java.util.Date());
+       ab.setAccountOwner("-");
+       ab.setAccountType("A");
+       ab.setAccountNumber(this.newAccountNumber(ab.getAccountSchema().getAccountGroup()));    
        em.persist(ab);
-       return true;
+       return ab;
        }
        catch(Exception e)
        {
-       return false;
+           System.out.println(e.getMessage());
+       ab.setAccountNumber(null);
+       return ab;
+     
        }
    }
    public boolean updateAcount(AccountBean ab)
@@ -80,4 +89,22 @@ public AccountsBean listAccountsByType(String type)
 return abs;   
 }
 
+
+public String newAccountNumber(String group)
+{
+    
+   Query q = em.createQuery("select max(ab.accountNumber)+1 from AccountBean ab where ab.accountSchema.accountGroup=:group");
+   q.setParameter("group", group);
+   List<Integer> nextAccount = new ArrayList();
+   nextAccount = q.getResultList();
+   if(nextAccount.size()>0)
+   {
+       return ""+nextAccount.get(0);
+   }
+   else
+   {
+    return group+"0001";   
+   }
+    
+}
 }

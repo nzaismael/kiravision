@@ -6,6 +6,7 @@
 package com.kira.settings.ejb;
 
 import com.kira.settings.entities.CurrencyBean;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,4 +27,18 @@ public class CurrencyEjb {
       Query q =em.createQuery("select cu from CurrencyBean cu ");
       return q.getResultList();
   }
+    
+    public CurrencyBean findCurrency(int id)
+    {
+        Query q = em.createQuery("select cu from CurrencyBean cu where cu.id=:id");
+        q.setParameter("id", id);
+        List<CurrencyBean> curs = new ArrayList<>();
+        curs=q.getResultList();
+        if(curs.size()>0)
+                {
+                    return curs.get(0);
+                }
+        else
+            return null;
+    }
 }

@@ -26,35 +26,49 @@
         <h:form>
             <h:panelGrid columns="2">
                
-               <p:outputLabel for="accountNumber" value="Account Number: " />
-                <h:inputText value="#{account.accountBean.accountNumber}"  id="accountNumber"/>
-           
-          
-                <p:outputLabel for="accountdesc" value="Account description " />
-                <h:inputTextarea value="#{account.accountBean.accountDescription}" cols="60" rows="5" id="accountdesc"/>
-                
-      
-              
-                
+          <p:outputLabel for="accountdesc" value="Account description " />
+                <h:inputTextarea value="#{accountController.accountBean.accountDescription}" cols="60" rows="3" id="accountdesc"/>
                 <h:outputLabel for="accounttype1" value="Account Type"/>
-                <h:selectOneMenu id ="accounttype1" value="#{accountController.accountBean.accountSchema}"   >
-                  <f:ajax execute="@this"  listener="#{accountController.changeAccountType}" />
-                    <f:selectItem itemValue="#{null}" itemLabel="--select--" />
+                <h:selectOneMenu id ="accounttype1" value="#{accountController.accountSchema.id}"   >
+                  
+                    <f:selectItem itemValue="0" itemLabel="--select--" />
                     <f:selectItems value="#{accountController.accountSchemas.accounttypes}" var="as"
-                                   itemLabel="#{as.description}" itemValue="#{as}" > 
-                    
-                    </f:selectItems>
+                                   itemLabel="#{as.description}" itemValue="#{as.id}" > 
                    
+                    </f:selectItems>
+                    <f:ajax execute="@this"  listener="#{accountController.changeAccountType}" render="output" />
    		</h:selectOneMenu> 
                 
                 
+                
             </h:panelGrid>
+           
+            <h:panelGroup id="output"  >
+                    <h:outputLabel for="bankid" value="Commercial Bank"/>
+                    <h:selectOneMenu id ="bankid" value="#{accountController.bank.id}"  disabled="#{accountController.accountSchema.id ne 1}" >
+                  
+                    <f:selectItem itemValue="0" itemLabel="--select--" />
+                    <f:selectItems value="#{accountController.banks.banks}" var="as"
+                                   itemLabel="#{as.bankFull}" itemValue="#{as.id}" > 
+                   
+                    </f:selectItems>
+                   	</h:selectOneMenu> 
+                </h:panelGroup>
             
+            <h:outputLabel for="currency" value="Account Currency"/>
+            <h:selectOneMenu id ="currency" value="#{accountController.currency.id}"   >
+                  
+                    <f:selectItem itemValue="0" itemLabel="--select--" />
+                    <f:selectItems value="#{accountController.currencies.currencies}" var="as"
+                                   itemLabel="#{as.description}" itemValue="#{as.id}" > 
+                   
+                    </f:selectItems>
+                   	</h:selectOneMenu> 
          
             <br></br>
-            <h:panelGrid columns="1">
-                <h:commandButton action="#{accountController.saveAccount()}"  value="Create Account"/>
-       </h:panelGrid>
+            
+            <p:commandButton  action="#{accountController.saveAccount()}"  value="Create Account" class="btn btn-primary" update="listaccountsid"  />
+       
         </h:form>
     </h:body>
 </html>

@@ -77,8 +77,12 @@
                         <rich:panel header="Account Operations">
                             <h:panelGroup id="accountside">
 
-                                <a4j:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton" class="btn btn-default " style=" width: 100%; text-align: left"  render="listaccountsid" value="List of Accounts"/>
-                                <h:commandButton id="exportentriesbutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Export Account Entries">
+                                <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton1" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="List of Accounts"/>
+                                <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton2" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Manual Accounting"/>
+                                <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton3" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Accounting Operation"/>
+                              <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton4" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Daily Operations"/>
+                              <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton5" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="End of the Day"/>
+                              <!--  <h:commandButton id="exportentriesbutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Export Account Entries">
                                     <f:ajax event="click" listener="#" render="listaccountsid"/>
                                 </h:commandButton>
                                 <h:commandButton id="operationsbutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Operations">
@@ -92,7 +96,7 @@
                                  <h:commandButton id="bankbutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Banks">
                                      <f:ajax event="click" listener="#" render="listaccountsid"/>
                                 </h:commandButton> 
-
+-->
                                  
                             </h:panelGroup>
                         </rich:panel>
@@ -103,6 +107,7 @@
                 <div class="col-sm-9">
                
                     <h:panelGroup id="listaccountsid">   
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
                         <span class="container-fluid" style="overflow: auto;" >    
                             
                             <div class="container" >
@@ -120,7 +125,9 @@
                     
                 </div>
                 
-              <!-- new Account Modal -->  
+              <!-- new Account Modal --> 
+             
+              
            <div class="modal fade" id="newaccountModal" role="dialog">
             <div class="modal-dialog modal-lg">
                 
@@ -131,17 +138,17 @@
                         <h4 class="modal-title">New Account Creation </h4>
                     </div>
                     <div class="modal-body">
-                        
-                        <iframe src="newAccount.xhtml" style="zoom:0.60" width="99.6%" height="900" frameborder="0"></iframe>
+                        <ui:include src="newAccount.xhtml"/>
+                     <!--   <iframe src="newAccount.xhtml" style="zoom:0.60" width="99.6%" height="900" frameborder="0"></iframe> -->
                     </div>
                     <div class="modal-footer bg-primary">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <b><span style=" text-align: right">Kira Vision Ltd. New Account Creation </span></b>  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
                 
             </div>
         </div>
-                  
+               
         <!-- end of new Account Modal-->
                <!-- new bank modal--> 
                 

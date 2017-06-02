@@ -14,9 +14,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import com.kira.settings.ejb.*;
+import com.kira.settings.entities.AccountType;
 import com.kira.settings.entities.AccountTypes;
+import com.kira.settings.entities.BankBean;
 import com.kira.settings.entities.BanksBean;
 import com.kira.settings.entities.CurrenciesBean;
+import com.kira.settings.entities.CurrencyBean;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -116,6 +119,43 @@ public AccountTypes accountTypes()
   
 }
 
+@Path("type/accounttypes/{id}")
+@GET
+@Produces({MediaType.APPLICATION_XML})
+public AccountType findAccountType(@PathParam("id")int id)
+{
+    
+    //System.out.println(this.getCurrencyEjb().listCurrencies().size());
+    AccountType at = new AccountType();
+   return  accountTypeEjb.findAccountType(id);
+  
+  
+}
+
+@Path("bank/allBanks/{id}")
+@GET
+@Produces({MediaType.APPLICATION_XML})
+public BankBean findBank(@PathParam("id")int id)
+{
+    
+    //System.out.println(this.getCurrencyEjb().listCurrencies().size());
+    BankBean bb = new BankBean();
+   return bankEjb.findBank(id);
+    
+  
+}
+
+@Path("currency/allCurrencies/{id}")
+@GET
+@Produces({MediaType.APPLICATION_XML})
+public CurrencyBean returnCurrencies(@PathParam("id")int id)
+{
+   
+    CurrencyBean cb = new CurrencyBean();
+    return this.getCurrencyEjb().findCurrency(id);
+    
+  
+}
 
 
     /**
