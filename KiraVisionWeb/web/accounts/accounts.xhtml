@@ -12,16 +12,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>Kira Vision Company</title>
-         <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
-    
-    <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    
-        <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-     
+         
+        
+      
+            <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="../design/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="../design/js/jquery-1-12.23.js" type="text/javascript"></script>
+        <script src="../design/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+        
         <style>
             .aligntop td {
                 vertical-align: top;
@@ -77,9 +77,8 @@
                         <rich:panel header="Account Operations">
                             <h:panelGroup id="accountside">
 
-                                <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton1" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="List of Accounts"/>
-                                <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton2" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Manual Accounting"/>
-                                <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton3" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Accounting Operation"/>
+                                <p:commandButton  action="#{accountController.listAccountsMenu()}" id="listaccountsbutton1" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="List of Accounts"/>
+                                <p:commandButton  action="#{accountController.accountOperationMenu()}" id="listaccountsbutton3" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid,:listaccouuntsform" value="Accounting Operation"/>
                               <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton4" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Daily Operations"/>
                               <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton5" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="End of the Day"/>
                               <!--  <h:commandButton id="exportentriesbutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Export Account Entries">
@@ -115,7 +114,10 @@
                                 <div class="panel panel-primary" >
                                     <div  class="panel-heading" style=" text-align: center;" >#{accountController.pageTitle}</div>
                                     <div class="panel-body" id="clientprincipals" >
+                                       
                                         <ui:include src="#{accountController.contentPage}"/>
+                       
+          
                                     </div>
                                 </div>
                             </div>
@@ -195,12 +197,6 @@
         
         
         
-         <link href="../css/style.css" rel="stylesheet" type="text/css"/>
-         <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <script src="../js/jquery-1-12.23.js" type="text/javascript"></script>
-        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
-       
         
         
         <!-- end of calculating premium for principal member -->
@@ -209,7 +205,7 @@
         
         
         <footer class="container-fluid">
-            <p>Radiant Insurance Company</p>
+            <p>Kira Vision Company Company LTD</p>
         </footer>   
         
  </h:body>       

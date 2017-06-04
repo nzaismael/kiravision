@@ -88,7 +88,7 @@ public class AccountController implements Serializable {
                String xml = response.readEntity(String.class);
            
            this.setAccounts((AccountsBean)CommonLibrary.unmarshalling(xml, AccountsBean.class));
-           System.out.println(xml);
+         
            
         }
         
@@ -185,7 +185,36 @@ public String saveAccount()
   }
   return null;
 }
-   
+ 
+public String listAccountsMenu()
+{
+    String url = "http://localhost:8080/KiraVision/account/allaccounts";
+        Response response=CommonLibrary.sendRESTRequest(url, "", MediaType.TEXT_PLAIN, "GET");
+        if(response.getStatus()==200)
+        {
+          
+               String xml = response.readEntity(String.class);
+           
+           this.setAccounts((AccountsBean)CommonLibrary.unmarshalling(xml, AccountsBean.class));
+         
+           
+        }
+    this.setContentPage("listAccounts.xhtml");
+        this.setPageTitle("List of Accounts");     
+   return null; 
+}
+
+public String accountOperationMenu() throws Exception
+{
+    
+   //FacesContext.getCurrentInstance().getExternalContext().redirect("/KiraVisionWeb/accounts/entriesExport.xhtml");
+        
+   this.setContentPage("entriesExport.xhtml");
+        this.setPageTitle("Daily Accounting Operations"); 
+    
+    
+    return null;
+}
 
     /**
      * @return the pageTitle
