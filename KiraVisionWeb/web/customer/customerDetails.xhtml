@@ -1,12 +1,34 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:rich="http://richfaces.org/rich">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Customer Details
+           
+        <rich:panel title="Customer Details"  id="customerdetails">
+            Details
+            <h:panelGrid columns="2"  class="text-primary text-capitalize">
+                <h:outputText value="Customer Id:"/>#{customer.cardHolder.clientId}
+                <h:outputText value="Customer Names: "/> #{customer.cardHolder.clientName} #{customer.cardHolder.clientSurname}
+                <h:outputText value="Customer Email: "/> #{customer.cardHolder.clientEmail}
+                <h:outputText value="Customer Phone: "/> #{customer.cardHolder.clientPhone}
+                <h:outputText value="Card Number: "/> #{customer.cardHolder.cardNumber}
+                <h:outputText value="Parent: "/> #{customer.cardHolder.grandChild.agentName} #{customer.cardHolder.grandChild.agentSurname}
+            </h:panelGrid>
+         </rich:panel>
+        <hr></hr>   
+          <rich:panel title="Customer Details1"  id="customerdetails1">
+              <h:outputText class="label label-danger text-primary" value="Commissions"/>
+            <h:panelGrid columns="2"  class="text-primary text-capitalize">
+                <h:outputText value="Total Unpaid Commissions: "/> 0
+                <h:outputText value="Number of Transactions: "/> 0
+                <h:outputText value="Total Amount of Transactions: "/> 0
+                <h:outputText value="Customers: "/> 0
+                 </h:panelGrid>
+         </rich:panel>  
     </h:body>
 </html>
 

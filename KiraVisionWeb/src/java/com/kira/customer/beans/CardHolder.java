@@ -25,7 +25,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="CLIENT")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CardHolder implements Serializable {
-    
+    public CardHolder()
+    {
+        
+    }
     @XmlElement(name="ID")
     
  private String clientId;
@@ -48,9 +51,9 @@ public class CardHolder implements Serializable {
     private String cardNumber;
            @XmlElement(name="STATUS")
     private boolean status;
-    private CommercialAgent parent;
-    private CommercialAgent child;
-    private CommercialAgent grandChild;
+    private CommercialAgent parent =new CommercialAgent();
+    private CommercialAgent child=new CommercialAgent();
+    private CommercialAgent grandChild =new CommercialAgent();
 
         @XmlElement(name="CREATEDON")
 private java.util.Date createdOn;

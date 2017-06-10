@@ -10,6 +10,7 @@ import com.kira.customer.beans.MerchantBeans;
 import com.kira.ussd.utilities.CommonLibrary;
 import java.io.Serializable;
 import java.util.Date;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -66,7 +67,14 @@ if(response.getStatus()==200)
 {
            this.getMerchants().getMerchants().add(0, this.getMerchant());
          this.setMerchant(new MerchantBean());
-}  
+         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "The partner Successfully added."));
+
+} 
+else
+{
+    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "The Partner Could not be added. See administrator to check."));
+
+}
      
     }
   

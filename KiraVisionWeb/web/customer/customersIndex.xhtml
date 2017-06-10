@@ -18,9 +18,7 @@
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
         <link href="../design/css/chosen.css" rel="stylesheet" type="text/css"/>
-        <script>
-                  
-        </script>
+       
     </h:head>
     <h:body>
         
@@ -49,8 +47,10 @@
                 
                 <div class="col-sm-9">
                     <h:form>
-                        <p:commandLink action='#{customer.insidenavigation("newCustomer.xhtml", "New Customer")}' update="customerside" value="New Customer" class="text-primary"/>
-                         </h:form>          
+                        <p:commandButton class="btn btn-primary" action='#{customer.insidenavigation("newCustomer.xhtml", "New Customer")}' update="customerside" value="+New Customer" />
+                         <p:commandButton class="btn btn-primary" action='#{customer.insidenavigation("newCustomer.xhtml", "New Customer")}' update="customerside" value="+Fincial Report" />
+                       
+                    </h:form>          
                     <h:panelGroup id="listcustomersside">   
                         <span class="container-fluid" style="overflow: auto;" >    
                             

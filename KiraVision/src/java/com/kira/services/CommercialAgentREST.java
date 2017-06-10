@@ -57,12 +57,20 @@ public class CommercialAgentREST {
    @Path("agentbyphone/{phone}/{pin}")
    @GET
    @Produces(MediaType.APPLICATION_XML)
-   public CommercialAgent getCommercialagentbyphone(@PathParam("phone")String phone,@PathParam("pin")String pin)
+   public CommercialAgent getCommercialagentbyphonepin(@PathParam("phone")String phone,@PathParam("pin")String pin)
    {
       return agentEjb.agentbyPhonepin(phone, pin);
       // return null;
    }        
            
-    
+   @Path("agentbyphone/{phone}")
+   @GET
+   @Produces(MediaType.APPLICATION_XML)
+   public CommercialAgent getCommercialagentbyPhone(@PathParam("phone")String phone)
+   {
+      return agentEjb.agentByPhone(phone);
+      // return null;
+   }        
+            
     
 }

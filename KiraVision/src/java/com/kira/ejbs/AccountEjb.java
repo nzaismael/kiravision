@@ -5,6 +5,7 @@
  */
 package com.kira.ejbs;
 
+
 import com.kira.entities.AccountBean;
 import com.kira.entities.AccountsBean;
 import java.util.ArrayList;
@@ -31,7 +32,9 @@ public class AccountEjb {
        ab.setModifiedOn(new java.util.Date());
        ab.setAccountOwner("-");
        ab.setAccountType("A");
-       ab.setAccountNumber(this.newAccountNumber(ab.getAccountSchema().getAccountGroup()));    
+       ab.setAccountNumber(this.newAccountNumber(ab.getAccountSchema().getAccountGroup()));  
+       
+       
        em.persist(ab);
        return ab;
        }

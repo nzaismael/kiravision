@@ -20,8 +20,22 @@
     </h:head>
     <h:body>
         <pp:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
-       <pp:separator />
         <h:form>
+            <h:outputText value="Phone number of Parent: "/> <pp:inputText value="#{customer.cardHolder.parent.agentPhone}" > 
+                 <a4j:ajax   listener="#{customer.customerParenthoud()}" render="agent" />
+             </pp:inputText>
+            <h:panelGroup id="agent">
+                <br></br> <h:outputText value="#{customer.chparent.clientName} #{customer.chparent.clientSurname}" rendered="#{not empty customer.chparent}" />
+                <br></br> <h:outputText value=" #{customer.chparent.clientEmail}" rendered="#{not empty customer.chparent}"/>
+                <br></br> <h:outputText value="#{customer.chparent.clientPhone}" rendered="#{not empty customer.chparent}"/>
+                
+                 
+                </h:panelGroup>
+            
+            
+       <pp:separator />
+        
+       
             
        
        <div id="newCustomerForm1">

@@ -1,12 +1,21 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:rich="http://richfaces.org/rich"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Statistics about Customers : volume of their purchases etc...
+         <rich:panel title="Sustoemrs Stats"  id="customerdetails1">
+              <h:outputText class="label label-danger text-primary" value="Commissions"/>
+            <h:panelGrid columns="2"  class="text-primary text-capitalize">
+                <h:outputText value="Total Unpaid Commissions: "/> 0
+                <h:outputText value="Number of Transactions: "/> 0
+                <h:outputText value="Total Amount of Transactions: "/> 0
+                <h:outputText value="Customers: "/> 0
+                 </h:panelGrid>
+         </rich:panel>  
     </h:body>
 </html>
 

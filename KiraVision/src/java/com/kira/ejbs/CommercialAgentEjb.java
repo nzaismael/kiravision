@@ -26,6 +26,17 @@ private EntityManager emco;
     @EJB
     CardHolderEjb customer;
     
+    public CommercialAgent addCommercialAgent(CommercialAgent agent,boolean ag)
+    {
+        agent.setCreatedOn(new java.util.Date());
+            agent.setModifiedOn(new java.util.Date());
+            agent.setStatus(true);
+            agent.setAgentType("P");
+            agent.setAgentPin("00000");
+        emco.persist(agent);
+        emco.flush();
+        return agent;
+    }
     public boolean addCommercialAgent(CommercialAgent agent)
     {
         try
@@ -35,8 +46,11 @@ private EntityManager emco;
             agent.setModifiedOn(new java.util.Date());
             agent.setStatus(true);
             agent.setAgentType("P");
+            agent.setAgentPin("00000");
             emco.persist(agent);
-            emco.flush();
+           emco.flush();
+           
+           // System.out.println(agent.getAgentId());
             CardHolder ca= new CardHolder();
             ca.setClientEmail(agent.getAgentEmail());
             ca.setClientName(agent.getAgentName());
@@ -46,13 +60,15 @@ private EntityManager emco;
             ca.setCreatedOn(agent.getCreatedOn());
             ca.setModifiedOn(agent.getModifiedOn());
             ca.setStatus(true);
+            ca.setChild(agent);
+            ca.setGrandChild(agent);
             ca.setParent(agent);
-            
-            customer.addCardHolder(ca);
+       customer.addCardHolder(ca,true);
             return true;
         }
         catch(Exception e)
         {
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -105,6 +121,25 @@ private EntityManager emco;
      {
          return null;
      }
+  
    }
    
+      
+ public CommercialAgent agentByPhone(String phone)   
+ {
+    Query q = emco.createQuery("select co from CommercialAgent co where co.agentPhone=:phone ");
+       q.setParameter("phone",phone);
+      
+     List<CommercialAgent> agents = q.getResultList();
+     if(agents.size()>0)
+     {
+         return agents.get(0);
+     }
+     else
+     {
+         return null;
+     } 
+     
+ }
+     
 }

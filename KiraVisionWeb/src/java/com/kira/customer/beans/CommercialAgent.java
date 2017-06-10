@@ -25,6 +25,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="COMMAGENT")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CommercialAgent implements Serializable {
+    public CommercialAgent()
+    {
+        
+    }
+    
 @XmlElement(name="ID")
 private Long agentId;
 
