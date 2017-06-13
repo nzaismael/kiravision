@@ -30,9 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
    
 public class MerchantBean implements Serializable{
     @Id
-     @GeneratedValue(strategy=GenerationType.AUTO)
+     @GeneratedValue(strategy=GenerationType.IDENTITY)
      @Column(name="merchantid",length=10,nullable=false)
-    private String merchantId;
+    private Long merchantId;
     @Column(name="merchantname",length=60,nullable=false)
     private String merchantName;
     @Column(name="merchantsurname",length=60)
@@ -57,14 +57,14 @@ public class MerchantBean implements Serializable{
     /**
      * @return the merchantId
      */
-    public String getMerchantId() {
+    public Long getMerchantId() {
         return merchantId;
     }
 
     /**
      * @param merchantId the merchantId to set
      */
-    public void setMerchantId(String merchantId) {
+    public void setMerchantId(Long merchantId) {
         this.merchantId = merchantId;
     }
 
@@ -207,7 +207,7 @@ public class MerchantBean implements Serializable{
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
+
     
     
 }  

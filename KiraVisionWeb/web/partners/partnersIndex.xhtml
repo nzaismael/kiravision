@@ -30,28 +30,28 @@
         <div class="container-fluid" >
             <div class="row content col-sm-12" >
                 <div class="col-sm-3 sidenav" style=" overflow-x:  scroll;">
-                    
+                    <h:panelGroup id="partnerside">
                         <rich:panel header="#{partner.leftPageTitle}">
-                            <h:panelGroup id="partnerside">
+                            
 
                                 <ui:include src="#{partner.leftPage}"/>
                                             
-                                 
+                                </rich:panel>  
                             </h:panelGroup>
-                        </rich:panel>
+                       
                    
                 </div>
                 
                 
                 <div class="col-sm-9">
-               
+                                  <h:form>
+                                <p:commandButton value="+New Partner" class="btn btn-primary"   action='#{partner.leftNavigation("newPartner.xhtml", "New Kira Vision Partner")}' update="partnerside"/>
+                                    </h:form>
                     <h:panelGroup id="listpartnerssid">   
                         <span class="container-fluid" style="overflow: auto;" >    
                             
                             <div class="container" >
-                                <h:form>
-                                <p:commandButton value="+New Partner" class="btn btn-primary"   action='#{partner.leftNavigation("newPartner.xhtml", "New Kira Vision Partner")}' update="partnerside"/>
-                                    </h:form>
+                                
                                  <div class="panel panel-primary" >
                                     <div  class="panel-heading" style=" text-align: center;" >List of Kira Vision Partners</div>
                                     <div class="panel-body" id="clientprincipals" >

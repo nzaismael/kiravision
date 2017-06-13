@@ -83,6 +83,16 @@ else
         this.setLeftPage(page);
         this.setLeftPageTitle(title);
     }
+ public void  leftNavigationDetails(String page, String title,Object obj)
+    {
+        this.setLeftPage(page);
+        this.setLeftPageTitle(title);
+        this.setMerchant((MerchantBean)obj);
+    }
+ public void leftNavigationContract(String page, String title,Object obj)
+ {
+     
+ }  
     
     /**
      * @return the merchant

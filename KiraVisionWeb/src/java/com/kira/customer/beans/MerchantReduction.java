@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.kira.entities;
+package com.kira.customer.beans;
 
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -21,19 +21,18 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Hp
  */
-@Entity
-@Table(name="merchantContract")
-@XmlRootElement(name="MERCHANT")
+
+@XmlRootElement(name="CONTRACT")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class MerchantReduction implements Serializable{
    @Id
    @XmlElement(name="ID")
-   @Column(name="contractId",nullable=false)
+   
    private Long Id ;
        @XmlElement(name="MERCHANT")
        
         private MerchantBean merchant;
-       @Column(name="reduction",nullable=false)
+     
        @XmlElement(name="REDUCTION")
         private double reduction; 
        @Temporal(TemporalType.DATE)
@@ -42,10 +41,10 @@ public class MerchantReduction implements Serializable{
          @XmlElement(name="SIGNATORYPARTNER")
         private String signatoryPartner;
          @XmlElement(name="PARTNERPOSITION")
-        @Column(name="partnerposition",length=180)
+       
          private String partnerPosition;
          @XmlElement(name="KIRAPOSITION")
-        @Column(name="kiraposition",length=180)
+       
          private String kiraPosition;
           @XmlElement(name="SIGNATORYKIRA")
         private String signatoryKira;

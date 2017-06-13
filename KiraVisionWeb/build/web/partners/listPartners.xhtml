@@ -33,7 +33,7 @@
                             
                             <span class="container-fluid" style="overflow: auto;">
                                 <h:panelGroup >
-                                    <table class="table table-hover table-striped" id="serviceproviderstb" >
+                                    <table class="table table-hover table-striped" id="serviceproviderstb" style=" text-align: left;" >
                                         <thead>
                                             <tr>
                                                 <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Counter</th>
@@ -73,7 +73,8 @@
                                                     
                                                     
                                                     <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>
-                                                        [<a4j:commandLink value="Details"/>]  
+                                                        [<p:commandLink value="Details" action='#{partner.leftNavigationDetails("partnerDetails.xhtml", "Partner Details", me)}' update="partnerside"/>]  
+                                                        [<a4j:commandLink value="Contract"/>]  
                                                     [<a4j:commandLink value="Branches"/>] 
                                                   [<a4j:commandLink value="POS"/>]
                                                     </td>   
@@ -115,9 +116,12 @@
                             "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
                         "columnDefs": [
          { 
-        "width": "25%", "targets": 6
+        "width": "15%", "targets": 6
        
-            }
+            },
+        { "width": "2%", "targets": 5 },
+        { "width": "1%", "targets":0 },
+        { "width": "1%", "targets":1 }    
             ]
                         
                         } );

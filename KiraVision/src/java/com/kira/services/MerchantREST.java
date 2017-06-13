@@ -5,15 +5,18 @@
  */
 package com.kira.services;
 
+import com.kira.ejbs.MerchantContractEjb;
 import com.kira.ejbs.MerchantEjb;
 import com.kira.entities.MerchantBean;
 import com.kira.entities.MerchantBeans;
+import com.kira.entities.MerchantReduction;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -26,7 +29,8 @@ import javax.ws.rs.core.MediaType;
 public class MerchantREST {
     @EJB
     MerchantEjb merchantEjb;
-    
+    @EJB
+    MerchantContractEjb contractejb;
     @POST
     @Path("newmerchant")
     @Consumes(MediaType.APPLICATION_XML)
@@ -53,5 +57,18 @@ public class MerchantREST {
        return merchantEjb.activeMerchants();
    }
    
-    
+@GET
+@Path("merchantContract/{merchantId}")
+public MerchantReduction getMerchantreduction(@PathParam("merchantId")Long merchantId)
+{
+    return contractejb.returnActiveContract(merchantId);
+}
+   
+@Path("merchantnewcontract")
+@POST
+@Consumes(MediaType.APPLICATION_XML)
+public MerchantReduction addNewMerchantContract(MerchantReduction contract)
+{
+    return contractejb.addMerchantContract(contract);
+}
 }
