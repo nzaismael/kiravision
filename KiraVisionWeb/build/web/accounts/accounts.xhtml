@@ -81,22 +81,8 @@
                                 <p:commandButton  action="#{accountController.accountOperationMenu()}" id="listaccountsbutton3" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid,:listaccouuntsform" value="Accounting Operation"/>
                               <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton4" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Daily Operations"/>
                               <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton5" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="End of the Day"/>
-                              <!--  <h:commandButton id="exportentriesbutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Export Account Entries">
-                                    <f:ajax event="click" listener="#" render="listaccountsid"/>
-                                </h:commandButton>
-                                <h:commandButton id="operationsbutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Operations">
-                                    <f:ajax event="click" listener="#" render="listaccountsid"/>
-                                </h:commandButton>
-                                             
-                               <h:commandButton id="operationschemabutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Operations Accounting Schema">
-                                    <f:ajax event="click" listener="#" render="listaccountsid"/>
-                                </h:commandButton> 
-
-                                 <h:commandButton id="bankbutton" class="btn btn-default btn-sm" style=" width: 100%; text-align: left" value="Banks">
-                                     <f:ajax event="click" listener="#" render="listaccountsid"/>
-                                </h:commandButton> 
--->
-                                 
+                               <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton6" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Transactions"/>
+                                                             
                             </h:panelGroup>
                         </rich:panel>
                     </h:form>

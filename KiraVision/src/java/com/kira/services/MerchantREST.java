@@ -29,8 +29,8 @@ import javax.ws.rs.core.MediaType;
 public class MerchantREST {
     @EJB
     MerchantEjb merchantEjb;
-    @EJB
-    MerchantContractEjb contractejb;
+     @EJB
+    MerchantContractEjb contractejb;  
     @POST
     @Path("newmerchant")
     @Consumes(MediaType.APPLICATION_XML)
@@ -59,9 +59,10 @@ public class MerchantREST {
    
 @GET
 @Path("merchantContract/{merchantId}")
-public MerchantReduction getMerchantreduction(@PathParam("merchantId")Long merchantId)
+  @Produces(MediaType.APPLICATION_XML)
+public MerchantReduction getMerchantcontract(@PathParam("merchantId")long merchantId)
 {
-    return contractejb.returnActiveContract(merchantId);
+    return contractejb.activeContract(merchantId);
 }
    
 @Path("merchantnewcontract")
@@ -69,6 +70,9 @@ public MerchantReduction getMerchantreduction(@PathParam("merchantId")Long merch
 @Consumes(MediaType.APPLICATION_XML)
 public MerchantReduction addNewMerchantContract(MerchantReduction contract)
 {
+    System.out.println("im in the contract saving");
     return contractejb.addMerchantContract(contract);
-}
+}  
+
+
 }

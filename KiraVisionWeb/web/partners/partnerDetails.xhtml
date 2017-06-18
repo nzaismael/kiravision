@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -21,7 +22,22 @@
                                         
                                     </div>
                                 </div>  
-            
+         
+            <div class="panel panel-primary" >
+              <div  class="panel-heading" style=" text-align: center;" >Contract Details</div>
+                                    <div class="panel-body" id="details" >
+                                        
+                                        <h:panelGrid  columns="2">
+                                            Signed On: <h:outputText value="#{partner.contract.signedOn}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </h:outputText>
+                                            Kira Sign by: <h:outputText value="#{partner.contract.signatoryKira}, #{partner.contract.kiraPosition}"/>
+                                            Partner Sign by: <h:outputText value="#{partner.contract.signatoryPartner}, #{partner.contract.partnerPosition}"/>
+                                            Reduction: <h:outputText value="#{partner.contract.reduction}"/>
+                                        </h:panelGrid>   
+                                        
+                                    </div>
+                                </div>  
             
            
                 

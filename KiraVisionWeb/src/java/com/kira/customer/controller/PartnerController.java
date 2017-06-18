@@ -7,6 +7,7 @@ package com.kira.customer.controller;
 
 import com.kira.customer.beans.MerchantBean;
 import com.kira.customer.beans.MerchantBeans;
+import com.kira.customer.beans.MerchantReduction;
 import com.kira.ussd.utilities.CommonLibrary;
 import java.io.Serializable;
 import java.util.Date;
@@ -29,6 +30,7 @@ public class PartnerController implements Serializable{
     private String leftPage;
     private String leftPageTitle;
     private Date verification;
+    private MerchantReduction contract = new MerchantReduction();
 
     public String listPartners() throws Exception
     {
@@ -88,11 +90,43 @@ else
         this.setLeftPage(page);
         this.setLeftPageTitle(title);
         this.setMerchant((MerchantBean)obj);
+       String contracturl="http://localhost:8080/KiraVision/merchant/merchantContract/"+Long.parseLong(this.getMerchant().getMerchantId()); 
+       Response response = CommonLibrary.sendRESTRequest(contracturl, "", MediaType.TEXT_PLAIN, "GET");
+      String contractxml = response.readEntity(String.class);
+     this.setContract((MerchantReduction)CommonLibrary.unmarshalling(contractxml, MerchantReduction.class));
+    
     }
  public void leftNavigationContract(String page, String title,Object obj)
  {
+     this.setLeftPage(page);
+     this.setLeftPageTitle(title);
+     this.setMerchant((MerchantBean)obj);
      
  }  
+ 
+ public void addNewPertnerContract()
+ {
+     this.getContract().setMerchant(this.getMerchant());
+    String xml = CommonLibrary.marchalling(this.getContract(), MerchantReduction.class);
+    String contracturl = "http://localhost:8080/KiraVision/merchant/merchantnewcontract";
+    System.out.println(xml);
+    Response response = CommonLibrary.sendRESTRequest(contracturl, xml, MediaType.APPLICATION_XML, "POST");
+  int status = response.getStatus();
+  System.out.println(status);
+    if(status==200)
+    {
+        String xmlresponse = response.readEntity(String.class);
+        MerchantReduction mre=(MerchantReduction)CommonLibrary.unmarshalling(xmlresponse, MerchantReduction.class);
+        this.leftNavigationDetails("partnerDetails.xhtml", "Partner Details",mre.getMerchant());
+    }
+    else
+    {
+        
+       
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "The Partner Contract could not be added. See the System administrator."));
+   
+    }
+ }
     
     /**
      * @return the merchant
@@ -162,6 +196,20 @@ else
      */
     public void setVerification(Date verification) {
         this.verification = verification;
+    }
+
+    /**
+     * @return the contract
+     */
+    public MerchantReduction getContract() {
+        return contract;
+    }
+
+    /**
+     * @param contract the contract to set
+     */
+    public void setContract(MerchantReduction contract) {
+        this.contract = contract;
     }
     
     

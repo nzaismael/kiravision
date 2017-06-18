@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 /**
@@ -19,8 +19,9 @@ import javax.persistence.Query;
  */
 @Stateless
 public class MerchantContractEjb {
-    @PersistenceUnit
-    EntityManager em;
+    @PersistenceContext
+   private EntityManager emcontra;
+    
     public MerchantReduction addMerchantContract(MerchantReduction contract)
     {
         try
@@ -30,24 +31,25 @@ public class MerchantContractEjb {
             for(MerchantReduction re:merchantcontracts)
             {
                 re.setStatus(false);
-                re.setSignedOn(new java.util.Date());
+             
+                re.setStopedOn(new java.util.Date());
                this.updatePernterContract(re);
             }
-        em.persist(contract);
-        em.flush();
-        
-        
-            return contract;
+            contract.setStatus(true);
+        emcontra.persist(contract);
+        emcontra.flush();
+              return contract;
         }
         catch(Exception e)
         {
+            System.out.println(e.getMessage());
             return null;
         }
         
     }
-public MerchantReduction returnActiveContract(long merchantId)    
+public MerchantReduction activeContract(long merchantId)    
 {
-    Query query = em.createQuery("select co from MerchantReduction co where co.merchant.merchantId=:id and co.status=true");
+    Query query = emcontra.createQuery("select co from MerchantReduction co where co.merchant.merchantId=:id and co.status=true");
    query.setParameter("id", merchantId);
     List<MerchantReduction> list= query.getResultList();
     if(list.size()>0)
@@ -58,15 +60,16 @@ public MerchantReduction returnActiveContract(long merchantId)
  
 public List<MerchantReduction> returnallpertinerContracts(long merchantId)
 {
-    Query query = em.createQuery("select re from MerchantReduction re where re.merchant.merchantId=:id");
-  return  query.getResultList();
+    Query query = emcontra.createQuery("select re from MerchantReduction re where re.merchant.merchantId=:id");
+  query.setParameter("id", merchantId);
+    return  query.getResultList();
 }
    
 public boolean updatePernterContract(MerchantReduction contract)
 {
     try
     {
-    em.merge(contract);
+    emcontra.merge(contract);
     return true;
     }
     catch(Exception e)

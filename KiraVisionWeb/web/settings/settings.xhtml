@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+   <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Kira Vision Company</title>
+         
+        
+      
+            <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="../design/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="../design/js/jquery-1-12.23.js" type="text/javascript"></script>
+        <script src="../design/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+        
+        <style>
+            .aligntop td {
+                vertical-align: top;
+            }
+        </style>
+        <h:outputStylesheet>
+            .top {
+            vertical-align: top;
+            }
+            
+            .info {
+            height: 202px;
+            overflow: auto;
+            }
+        </h:outputStylesheet>
+        <style>
+            /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+            .row.content {height: 1500px}
+            
+            /* Set gray background color and 100% height */
+            .sidenav {
+                background-color: #f1f1f1;
+                height: 100%;
+            }
+            
+            /* Set black background color, white text and some padding */
+            footer {
+                background-color: #555;
+                color: white;
+                padding: 15px;
+            }
+            
+            /* On small screens, set height to 'auto' for sidenav and grid */
+            @media screen and (max-width: 767px) {
+                .sidenav {
+                    height: auto;
+                    padding: 15px;
+                }
+                .row.content {height: auto;} 
+            }
+        </style>
+        
+        
+    </h:head>
+    <h:body>
+        
+        <ui:include src="../mainMenu/header.xhtml"/>
+        
+        <div class="container-fluid" >
+            <div class="row content col-sm-12" >
+                <div class="col-sm-3 sidenav" style=" overflow-x:  scroll;">
+                    <h:form id="sidecli">
+                        <rich:panel header="Settings">
+                            <h:panelGroup id="accountside">
+
+                                <p:commandButton  action="#{settingsController.listUsers()}" id="listaccountsbutton1" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Users"/>
+                               <p:commandButton  action="#{settingsController.listUsers()}" id="listaccountsbutton2" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Account Types"/>
+                                <p:commandButton  action="#{settingsController.listUsers()}" id="listaccountsbutton3" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Commissions Distribution"/>
+                              
+                                
+                            </h:panelGroup>
+                        </rich:panel>
+                    </h:form>
+                </div>
+                
+                
+                <div class="col-sm-9">
+               
+                    <h:panelGroup id="listaccountsid">   
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
+                        <span class="container-fluid" style="overflow: auto;" >    
+                            
+                            <div class="container" >
+                                <h4>#{settingsController.pageTitle}</h4>
+                                <div class="panel panel-primary" >
+                                    <div  class="panel-heading" style=" text-align: center;" >#{settingsController.pageTitle}</div>
+                                    <div class="panel-body" id="clientprincipals" >
+                                       
+                                        <ui:include src="#{settingsController.leftPageMenu}"/>
+                       
+          
+                                    </div>
+                                </div>
+                            </div>
+                        </span> 
+                    </h:panelGroup>  
+                    
+                    
+                </div>
+                
+           
+                
+            </div>
+        </div>
+        
+        
+        
+        <rich:popupPanel id="progress1" autosized="true">
+            <h:graphicImage value="../images/ajax_progress.gif" alt="Finding Transactions " />
+            
+        </rich:popupPanel>   
+        
+        
+        
+        
+        
+        
+        
+        
+        <!-- end of calculating premium for principal member -->
+        
+        
+        
+        
+        <footer class="container-fluid">
+            <p>Kira Vision Company Company LTD</p>
+        </footer>   
+        
+ </h:body>       
+    
+</html>
+

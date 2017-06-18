@@ -39,6 +39,11 @@ private java.util.Date modifiedOn;
   @Column(length=40,nullable=false)
 private String userPin;
   private boolean status;
+  @Column(name="mobile",length=20,unique=true)
+  private String mobileNumber;
+  @Column(name="email",length=30)
+  private String userEmail;
+  
    /**
      * @return the userPin
      */
@@ -134,6 +139,34 @@ private String userPin;
      */
     public void setModifiedOn(java.util.Date modifiedOn) {
         this.modifiedOn = modifiedOn;
+    }
+
+    /**
+     * @return the mobileNumber
+     */
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    /**
+     * @param mobileNumber the mobileNumber to set
+     */
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    /**
+     * @return the userEmail
+     */
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    /**
+     * @param userEmail the userEmail to set
+     */
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
 }

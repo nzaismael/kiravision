@@ -74,7 +74,7 @@
                                                     
                                                     <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>
                                                         [<p:commandLink value="Details" action='#{partner.leftNavigationDetails("partnerDetails.xhtml", "Partner Details", me)}' update="partnerside"/>]  
-                                                        [<a4j:commandLink value="Contract"/>]  
+                                                        [<p:commandLink value="Contract" action='#{partner.leftNavigationContract("newPertnerContract.xhtml","New Contract", me) }' update="partnerside"/>]  
                                                     [<a4j:commandLink value="Branches"/>] 
                                                   [<a4j:commandLink value="POS"/>]
                                                     </td>   

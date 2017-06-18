@@ -42,15 +42,18 @@
                     
                     <a4j:commandLink id="customerId" action="#{customer.listCustomers()}" class="omenu col-xs-1">Customers</a4j:commandLink>
                   <!--  <a id="serviceProviderId"  href="/KiraVisionWeb/customer/customerIndex.xhtml" class="omenu col-xs-1" >Customers</a> -->
-                  <a4j:commandLink id="partnerId" action="#{partner.listPartners()}" class="omenu col-xs-1">Partners</a4j:commandLink>
+                  <a4j:commandLink id="partnerId" action="#{partner.listPartners()}" class="omenu col-xs-2">Partners</a4j:commandLink>
                 
                   <!--<a id="customersId"  href="/HealthInsuranceWeb/faces/customers/customers.xhtml" class="omenu col-xs-1 " >Partners</a> -->
                   <a4j:commandLink id="agentsId" action="#{agent.listCommercialAgents()}" class="omenu col-xs-2"> <h:outputText value="Commercial Agents"/>   </a4j:commandLink>
                   <a4j:commandLink id="accountsId" action="#{accountController.haveListofAccounts()}" class="omenu col-xs-1">Accounts</a4j:commandLink>
                 
-                    <a id="policesId" href="/HealthInsuranceWeb/faces/police/listPolices.xhtml" class="omenu active col-xs-1">Reports</a>
-                 <a id="settingsId" href="/HealthInsuranceWeb/faces/settings/settingsindex.xhtml" class="omenu col-xs-1">Settings</a>
-                 </h:form>
+                      <a4j:commandLink id="settingsId" action="#{settingsController.listUsers()}" class="omenu col-xs-1">Settings</a4j:commandLink>
+                
+                     <a id="policesId" href="/HealthInsuranceWeb/faces/police/listPolices.xhtml" class="omenu active col-xs-1">Reports</a>
+               
+                    
+                    </h:form>
                 </div>
             </div>
         </nav>

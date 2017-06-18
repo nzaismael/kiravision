@@ -25,6 +25,7 @@ private EntityManager em;
 
 public boolean addMerchant(MerchantBean merchant)  
 {
+    
     try
     {
        em.persist(merchant);
@@ -60,7 +61,8 @@ public boolean addMerchant(MerchantBean merchant)
       mb.setMerchants(q.getResultList());
      return mb;
   }
-    
+  
+  
 public MerchantBeans activeMerchants()
 {
     Query q = em.createQuery("select m from MerchantBean m where m.status=true");

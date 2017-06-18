@@ -8,6 +8,8 @@ package com.kira.entities;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,16 +25,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name="merchantContract")
-@XmlRootElement(name="MERCHANT")
+@XmlRootElement(name="CONTRACT")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class MerchantReduction implements Serializable{
    @Id
    @XmlElement(name="ID")
    @Column(name="contractId",nullable=false)
+   @GeneratedValue(strategy=GenerationType.IDENTITY)
    private Long Id ;
        @XmlElement(name="MERCHANT")
-       
-        private MerchantBean merchant;
+       private MerchantBean merchant;
        @Column(name="reduction",nullable=false)
        @XmlElement(name="REDUCTION")
         private double reduction; 
@@ -48,6 +50,7 @@ public class MerchantReduction implements Serializable{
         @Column(name="kiraposition",length=180)
          private String kiraPosition;
           @XmlElement(name="SIGNATORYKIRA")
+          @Column(name="signatoryKira",length=180)
         private String signatoryKira;
            @XmlElement(name="STOPPEDON")
            @Temporal(TemporalType.TIMESTAMP)

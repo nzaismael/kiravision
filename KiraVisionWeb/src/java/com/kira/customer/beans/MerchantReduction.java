@@ -37,12 +37,11 @@ public class MerchantReduction implements Serializable{
         private double reduction; 
        @Temporal(TemporalType.DATE)
         @XmlElement(name="SIGNEDON")
-        private java.util.Date signedOn;
+        private java.util.Date signedOn = new java.util.Date();
          @XmlElement(name="SIGNATORYPARTNER")
         private String signatoryPartner;
          @XmlElement(name="PARTNERPOSITION")
-       
-         private String partnerPosition;
+          private String partnerPosition;
          @XmlElement(name="KIRAPOSITION")
        
          private String kiraPosition;
@@ -194,6 +193,7 @@ public class MerchantReduction implements Serializable{
         this.status = status;
     }
 
+  
    
     
     
