@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Kira%20Vision/kiravision/KiraVision/src/java/com/kira/settings/ejb/CurrencyEjb.java</file>
+            <file>file:/C:/Kira%20Vision/kiravision/KiraVision/src/java/com/kira/settings/entities/User.java</file>
+            <file>file:/C:/Kira%20Vision/kiravision/KiraVision/src/java/com/kira/settings/ejb/BankEjb.java</file>
+            <file>file:/C:/Kira%20Vision/kiravision/KiraVision/src/java/com/kira/settings/service/UserFacadeREST.java</file>
+        </group>
     </open-files>
 </project-private>

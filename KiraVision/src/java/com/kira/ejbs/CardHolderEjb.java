@@ -46,7 +46,7 @@ private EntityManager em;
         }
         else
         {
-            System.out.println("in the card holder addition "+ag.getAgentPhone());
+         //   System.out.println("in the card holder addition "+ag.getAgentPhone());
         CommercialAgent ag2 = comejb.agentByPhone(ag.getAgentPhone());
            if(ag.getAgentId()!=null)
            {
@@ -155,6 +155,15 @@ private EntityManager em;
             } catch(Exception e){return null;}
         }
         
-        
+ public CardHolder getCardHolderByCardNumber(String cardNumber)
+ {
+     Query q = em.createQuery("select ch from CardHolder ch  where ch.cardNumber=:cardNumber");
+            q.setParameter("cardNumber", cardNumber);
+            
+            try
+            {
+            return (CardHolder) q.getSingleResult();
+            } catch(Exception e){return null;}
+ }
         
 }

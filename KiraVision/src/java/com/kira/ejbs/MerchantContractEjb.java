@@ -64,6 +64,8 @@ public List<MerchantReduction> returnallpertinerContracts(long merchantId)
   query.setParameter("id", merchantId);
     return  query.getResultList();
 }
+
+
    
 public boolean updatePernterContract(MerchantReduction contract)
 {

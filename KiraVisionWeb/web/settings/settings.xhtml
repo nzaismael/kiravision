@@ -13,15 +13,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>Kira Vision Company</title>
          
-        
-      
-            <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="../design/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <script src="../design/js/jquery-1-12.23.js" type="text/javascript"></script>
-        <script src="../design/js/bootstrap.min.js" type="text/javascript"></script>
+         <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
+    
+    <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
-        
+        <link href="../design/css/chosen.css" rel="stylesheet" type="text/css"/>
+       
+          <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="../design/js/chosen.jquery.min.js" type="text/javascript"></script>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
         <style>
             .aligntop td {
                 vertical-align: top;
@@ -77,9 +82,11 @@
                         <rich:panel header="Settings">
                             <h:panelGroup id="accountside">
 
-                                <p:commandButton  action="#{settingsController.listUsers()}" id="listaccountsbutton1" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Users"/>
-                               <p:commandButton  action="#{settingsController.listUsers()}" id="listaccountsbutton2" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Account Types"/>
-                                <p:commandButton  action="#{settingsController.listUsers()}" id="listaccountsbutton3" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Commissions Distribution"/>
+                                <p:commandButton  action="#{settingsController.listUsers()}" id="listusersbutton" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listusersid" value="Users"/>
+                               <p:commandButton  action="#{settingsController.listUsers()}" id="listaccountsbutton2" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listusersid" value="Account Types"/>
+                                <p:commandButton  action="#{settingsController.listUsers()}" id="listaccountsbutton3" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listusersid" value="Commissions Distribution"/>
+                               <p:commandButton  action="#{settingsController.listUsers()}" id="listaccountsbutton4" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listusersid" value="Different Charges"/>
+                               <p:commandButton  action="#{settingsController.listUsers()}" id="listaccountsbutton5" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listusersid" value="Other Settings"/>
                               
                                 
                             </h:panelGroup>
@@ -90,7 +97,7 @@
                 
                 <div class="col-sm-9">
                
-                    <h:panelGroup id="listaccountsid">   
+                    <h:panelGroup id="listusersid">   
                         <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
                         <span class="container-fluid" style="overflow: auto;" >    
                             

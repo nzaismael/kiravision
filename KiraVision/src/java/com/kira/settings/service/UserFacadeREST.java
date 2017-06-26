@@ -18,8 +18,10 @@ import com.kira.settings.entities.AccountType;
 import com.kira.settings.entities.AccountTypes;
 import com.kira.settings.entities.BankBean;
 import com.kira.settings.entities.BanksBean;
+import com.kira.settings.entities.CommissionsDistributions;
 import com.kira.settings.entities.CurrenciesBean;
 import com.kira.settings.entities.CurrencyBean;
+import com.kira.settings.entities.Users;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -38,13 +40,16 @@ private CurrencyEjb currencyEjb;
 private BankEjb bankEjb;
 @EJB
 AccountTypeEjb accountTypeEjb;
-
+@EJB
+private CommissionsDistributionEjb comejb;
     @Path("list")
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public List<User> listAllUsers()
+    public Users listAllUsers()
     {
-     return getUserEjb().listAllUsers();
+        Users users = new Users();
+        users.setListUsers(getUserEjb().listAllUsers());
+     return users;
     } 
     
     @Path("finduser/{userid}")
@@ -65,6 +70,7 @@ AccountTypeEjb accountTypeEjb;
     @Consumes(MediaType.APPLICATION_XML)
     public boolean addNewUser(User user)
     {
+        user.setUserPin("secret123");
         user.setCreatedOn(new java.util.Date());
         user.setModifiedOn(new java.util.Date());
         return getUserEjb().addUser(user);
@@ -156,6 +162,18 @@ public CurrencyBean returnCurrencies(@PathParam("id")int id)
     
   
 }
+
+@Path("commissions/activecommissions")
+@GET
+@Produces(MediaType.APPLICATION_XML)
+public CommissionsDistributions getAllcommissionsdistribution()
+{
+    CommissionsDistributions cd = new CommissionsDistributions();
+    cd .setComs(comejb.allCommissionsDistribution());
+   return  cd;
+    
+}
+
 
 
     /**

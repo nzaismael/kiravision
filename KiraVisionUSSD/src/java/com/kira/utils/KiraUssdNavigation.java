@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement(name="USSDNAVIGATION")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class KiraUssdNavigation {
+public class KiraUssdNavigation implements Serializable{
     @XmlElement(name="SESSIONID")
     private String sessionid;
    

@@ -7,9 +7,7 @@ package com.kira.utils;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 import javax.ejb.Singleton;
-import javax.ejb.Startup;
 
 
 /**
@@ -18,6 +16,7 @@ import javax.ejb.Startup;
  */
 
 @Singleton
+
 public class KiraSessionManager implements Serializable {
      private ConcurrentHashMap<String, KiraUssdNavigation> missdnSessions = new ConcurrentHashMap<>();
     

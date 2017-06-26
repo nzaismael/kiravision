@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,21 +28,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User implements Serializable {
  @Id
   @Column(length=30,nullable=false)
+ @XmlElement(name="ID",nillable=true)
 private String userId; 
   @Column(length=60,nullable=false)
+  @XmlElement(name="NAME")
 private String username;
   @Column(length=60,nullable=false)
+  @XmlElement(name="SURNAME",nillable=true)
 private String userSurname;
   @Temporal(TemporalType.TIMESTAMP)
+  @XmlElement(name="CREATEDON")
 private java.util.Date createdOn;
   @Temporal(TemporalType.TIMESTAMP)
+  @XmlElement(name="MODIFIEDON")
 private java.util.Date modifiedOn;
   @Column(length=40,nullable=false)
+  @XmlElement(name="SECRET",nillable=true)
 private String userPin;
+  @XmlElement(name="STATUS")
   private boolean status;
   @Column(name="mobile",length=20,unique=true)
+  @XmlElement(name="MOBILE",nillable=true)
   private String mobileNumber;
   @Column(name="email",length=30)
+  @XmlElement(name="EMAIL",nillable=true)
   private String userEmail;
   
    /**

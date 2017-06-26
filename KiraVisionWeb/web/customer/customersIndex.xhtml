@@ -2,105 +2,175 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:a4j="http://richfaces.org/a4j"
-       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-        <h:head>
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
         <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    
-    <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
-    
-    <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
+
+        <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
         <link href="../design/css/chosen.css" rel="stylesheet" type="text/css"/>
        
+
     </h:head>
     <h:body>
-        
+
         <ui:include src="../mainMenu/header.xhtml"/>
-       
+
         <div class="container-fluid" >
             <div class="row content col-sm-12" >
-                
-                <div class="col-sm-3 sidenav" style=" overflow-x:  scroll;" >
-                 
-                  <h:panelGroup id="customerside">
-                      
-                        <rich:panel header="#{customer.leftPageTitle}" >
-                            
 
-                                <ui:include src="#{customer.leftPageContent}"/>
-                                            
-                                 
-                            
-                        </rich:panel>
-                    
-                    
-                    </h:panelGroup>
-                </div>
-                
-                
-                <div class="col-sm-9">
+                <!--  <div class="col-sm-0 sidenav" style=" overflow-x:  scroll;" >
+                   
+                    <h:panelGroup id="customerside">
+                        
+                         <div class="panel panel-primary" >
+                             <div  class="panel-heading" style=" text-align: center;" ><h:outputText value="#{customer.leftPageTitle}"/></div>
+                                      <div class="panel-body" id="details" >
+            
+                      
+                              
+  
+                                  <ui:include src="#{customer.leftPageContent}"/>
+                                      </div>
+                         </div>
+                        
+                                   
+                              
+                          
+                      
+                      
+                      </h:panelGroup>
+                  </div>
+                -->
+ <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
+     
+                <div class="col-sm-12">
                     <h:form>
-                        <p:commandButton class="btn btn-primary" action='#{customer.insidenavigation("newCustomer.xhtml", "New Customer")}' update="customerside" value="+New Customer" />
-                         <p:commandButton class="btn btn-primary" action='#{customer.insidenavigation("newCustomer.xhtml", "New Customer")}' update="customerside" value="+Fincial Report" />
-                       
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newcustomerModal">+New Customer</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Statistics</button>
+
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">+Financial Report</button>
+
+
                     </h:form>          
                     <h:panelGroup id="listcustomersside">   
                         <span class="container-fluid" style="overflow: auto;" >    
-                            
+
                             <div class="container" >
-                                
-                               
+
+
                                 <div class="panel panel-primary" >
                                     <div  class="panel-heading" style=" text-align: center;" >List of Kira Vision Customers</div>
                                     <div class="panel-body" id="clientprincipals" >
                                         <ui:include src="customerIndex.xhtml"/>
-                                        
+
                                     </div>
                                 </div>
                             </div>
                         </span> 
                     </h:panelGroup>  
-                    
-                    
+
+
                 </div>
-                
-            
-                         
-        
-                
-                
-                
-         
-                
-                
+
+
+
+
+
+
+
+
+
+
             </div>
         </div>
-        
-        
-        
-       
-        
-        
-        
-        
-        
-     
-        
-        <!-- end of calculating premium for principal member -->
-        
-        
-        
-        
-       
-        
- </h:body>       
-    
+
+
+
+
+
+        <!-- Modal new customer-->
+         
+        <div id="newcustomerModal" class="modal fade " role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+               
+                <div class="modal-content">
+                    <div class="modal-header bg-info">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">New Customer</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ui:include src="newCustomer.xhtml"/>
+                    </div>
+                    <div class="modal-footer bg-primary">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- end new modal customer -->        
+
+        <!-- Modal for customer Editing -->
+
+        <div id="editcustomerModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content modal-lg">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Editing Customer</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ui:include src="editCustomer.xhtml"/>
+                    </div>
+                    <div class="modal-footer bg-primary">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+ <!-- end for customer editing -->
+
+<!-- Modal for customer Details -->
+
+        <div id="detailscustomerModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content modal-lg">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Customer Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ui:include src="customerDetails.xhtml"/>
+                    </div>
+                    <div class="modal-footer bg-primary">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+   <!-- end for customer editing -->
+
+
+
+
+
+    </h:body>       
+
 </html>
 

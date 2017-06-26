@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <script type="javascript">
+            function closeusermodal()
+            {
+          $("#newUserModal .close").click()  ;
+            }
+        </script>
+    </h:head>
+    <h:body>
+       
+        Hello from Facelets
+        
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="userid" value="User Login Name: "/> <h:inputText  value="#{settingsController.newuser.userId}" id="userid" required="true"  requiredMessage="User id is required."/>
+                <h:outputLabel for="username" value="Firt Name: "/> <h:inputText  value="#{settingsController.newuser.username}" id="username"/>
+                <h:outputLabel for="susername" value="Surname: "/> <h:inputText  value="#{settingsController.newuser.userSurname}" id="susername"/>
+                <h:outputLabel for="email" value="Email Address: "/> <h:inputText  value="#{settingsController.newuser.userEmail}" id="email"/>
+                <h:outputLabel for="mobile" value="Phone Number: "/> <h:inputText  value="#{settingsController.newuser.mobileNumber}" id="mobile" />
+               
+            </h:panelGrid>
+            <p:commandButton class="btn btn-primary" value="Save the User" action="#{settingsController.addNewUser()}" update=":listusersid" onclick="closeusermodal()"/>
+        </h:form>
+   
+    </h:body>
+</html>
+

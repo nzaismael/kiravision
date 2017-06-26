@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:pp="http://primefaces.org/ui"
+      xmlns:a4j="http://richfaces.org/a4j">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGroup id="editcustomerPanel">
+          <div class="panel panel-primary" >
+                           <div  class="panel-heading" style=" text-align: center;" ><h:outputText value="#{customer.leftPageTitle}"/></div>
+                                    <div class="panel-body" id="details" >
+            
+            <h:panelGroup id="agent">
+                <h:outputText value="Kira Vision customer parent" class=" label label-success text-capitalize"/>
+                <br></br> <h:outputLabel for="agentname" value="Parent Names: "/><h:outputText id="agentname" value="#{customer.cardHolder.grandChild.agentName} #{customer.cardHolder.grandChild.agentSurname}"  />
+                <br></br><h:outputLabel for="agentemail" value="Parent Email:"/> <h:outputText id="agentemail" value=" #{customer.cardHolder.grandChild.agentEmail}" />
+                <br></br> <h:outputLabel for="agentphone" value="Parent Phone:"/><h:outputText id="agentphone" value="#{customer.cardHolder.grandChild.agentPhone}" />
+                
+                 
+                </h:panelGroup>
+            
+            
+     
+        
+       
+            
+       
+       <div id="newCustomerForm1">
+           
+           
+               <table><tr>
+                       <td>Name: </td><td> <h:inputText  value="#{customer.cardHolder.clientName}" p:placeholder="Customer Name"/></td></tr>
+                           <tr><td>Surname:</td><td> <h:inputText  value="#{customer.cardHolder.clientSurname}" p:placeholder="Customer Surname"/></td></tr>
+                           <tr><td>Phone Number:</td><td> <h:inputText disabled="true" value="#{customer.cardHolder.clientPhone}" p:placeholder="Customer Phone"/></td></tr>
+                           <tr><td>Email:</td><td> <h:inputText  value="#{customer.cardHolder.clientEmail}" p:placeholder="Customer Email"/></td></tr>
+                           <tr><td>Card Serial Number:</td><td> <h:inputText  value="#{customer.cardHolder.cardNumber}" p:placeholder="Card Number"/></td></tr>
+                           
+                           
+                           <tr >
+                               
+                             <td colspan="2">
+                                   <h:commandButton  value="Save  Customer" class="btn btn-primary"   >
+                                       <a4j:ajax execute="@form" render=":listcustomersside"  listener="#{customer.saveEditingCustomer()}" oncomplete="javascript:closeModal()"  immediate="false"/>
+                                   </h:commandButton>
+                                   
+                               </td>   
+                               
+                           </tr>
+               </table>
+               
+               
+         
+       
+       </div>
+       
+       </div>
+  </div>  
+  </h:panelGroup>           
+       </h:form> 
+           
+    </h:body>
+</html>
+

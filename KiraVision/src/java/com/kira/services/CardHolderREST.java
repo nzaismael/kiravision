@@ -5,9 +5,12 @@
  */
 package com.kira.services;
 
+import com.kira.beans.CustomerPOS;
 import com.kira.ejbs.CardHolderEjb;
 import com.kira.entities.CardHolder;
 import com.kira.entities.CardHolders;
+import com.kira.ussd.utilities.CommonLibrary;
+import java.io.InputStream;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -18,6 +21,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  *
@@ -80,6 +84,29 @@ public class CardHolderREST {
     {
         return this.getClientEjb().editcardholder(cardholder);
     }
+    
+   @Path("customercard/{cardNumber}")
+    @GET
+    public String customerbyCardNumberPOS(@PathParam("cardNumber")String cardNumber)
+    {
+        ObjectMapper mapper = new ObjectMapper();
+       
+       CardHolder cardholder= this.getClientEjb().getCardHolderByCardNumber(cardNumber);
+       try
+       {
+           CustomerPOS cpo = new CustomerPOS();
+           cpo.setCustomerNames(cardholder.getClientName()+" "+cardholder.getClientSurname());
+           cpo.setPhoneNumber(cardholder.getClientPhone());
+           String json = mapper.writeValueAsString(cpo);
+           return json;
+       }
+       catch(Exception e)
+       {
+           return null;
+       }
+       
+    }
+    
     
     /**
      * @return the clientEjb

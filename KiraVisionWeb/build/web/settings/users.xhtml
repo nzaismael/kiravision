@@ -9,12 +9,17 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
+        
     </h:head>
     <h:body>
           <h:form >
-        <button type="button" class="btn  btn-primary btn-sm" data-toggle="modal" data-target="#newaccountModal">+New User</button>
+        <button type="button" class="btn  btn-primary btn-sm" data-toggle="modal" data-target="#newUserModal">+New User</button>
         <hr></hr>   
        
+        
+        
+        
+        
       <table class="table table-hover table-striped" id="accountstbl" >
                                         <thead>
                                             <tr>
@@ -27,19 +32,19 @@
                                             </tr>
                                         </thead>
                                         <tbody class='row'> 
-                                            <c:forEach items="#{accountController.accounts.listaccounts}" var="acc" varStatus="accs" > 
+                                            <c:forEach items="#{settingsController.sysUsers.listUsers}" var="u" varStatus="us" > 
                                                 
-                                                <tr>
+                                               
                                                     <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'  style="width:2%;">
-                                                        <h:outputText value="#{accs.index+1}">
+                                                        <h:outputText value="#{us.index+1}">
                                                         </h:outputText>
                                                         
                                                     </td>
-                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{acc.accountNumber}</td>
-                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{acc.accountDescription}</td>
-                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{acc.currency.description}</td>
-                                                      
-                                                    
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{u.username}</td>
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{u.userSurname}</td>
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{u.userId}</td>
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{u.userEmail}</td>  
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{u.mobileNumber}</td>
        
                                                     
                                                 </tr>
@@ -53,8 +58,36 @@
                                         
                                         
                                     </table>
+        
+        <!-- New User Modal-->
+        <div class="modal fade" id="newUserModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                
+                <!-- Modal content-->
+                <div class="modal-content modal-sm ">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">New System User Creation </h4>
+                    </div>
+                    <div class="modal-body">
+                        <ui:include src="newUser.xhtml"/>
+                     <!--  <iframe src="newUser.xhtml" style="zoom:0.60" width="99.6%" height="15%" frameborder="0"></iframe> -->
+                    </div>
+                    <div class="modal-footer bg-primary">
+                          <b><span style=" text-align: right">Kira Vision Ltd.  </span></b>  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- End new user Modal  -->
+        
+        
+        
+        
                      <script type="text/javascript">
-                    
+                    $(document).ready(function() {
                         var  table=  $('#accountstbl').dataTable({
                         
                             "autoWidth": true,  
@@ -65,12 +98,19 @@
                         
                         
                         } );
+                  
+                $('#accountstbl tbody').on( 'click', 'tr', function () {
+        $(this).toggleClass('selected');
+    } );        
                     
-                    
+    });
+    
                     
                     
                     </script>                  
      
+        
+        
      </h:form> 
     </h:body>
 </html>

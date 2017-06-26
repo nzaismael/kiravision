@@ -2,100 +2,152 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-        <h:head>
-        
+    <h:head>
         <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    
-    <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
-    
-    <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
+
+        <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
         <link href="../design/css/chosen.css" rel="stylesheet" type="text/css"/>
-         
        
-   </h:head>
+
+    </h:head>
     <h:body>
-        
+
         <ui:include src="../mainMenu/header.xhtml"/>
-        
+
         <div class="container-fluid" >
             <div class="row content col-sm-12" >
-                <div class="col-sm-3 sidenav" style=" overflow-x:  scroll;">
-                    <h:panelGroup id="partnerside">
-                        <rich:panel header="#{partner.leftPageTitle}">
-                            
 
-                                <ui:include src="#{partner.leftPage}"/>
-                                            
-                                </rich:panel>  
-                            </h:panelGroup>
-                       
-                   
-                </div>
+
                 
-                
-                <div class="col-sm-9">
-                                  <h:form>
-                                <p:commandButton value="+New Partner" class="btn btn-primary"   action='#{partner.leftNavigation("newPartner.xhtml", "New Kira Vision Partner")}' update="partnerside"/>
-                                    </h:form>
-                    <h:panelGroup id="listpartnerssid">   
+ <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
+     
+                <div class="col-sm-12">
+                    <h:form>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newpartnerModal">+New Partner</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Statistics</button>
+
+
+                    </h:form>          
+                    <h:panelGroup id="listpartnersside">   
                         <span class="container-fluid" style="overflow: auto;" >    
-                            
+
                             <div class="container" >
-                                
-                                 <div class="panel panel-primary" >
+
+
+                                <div class="panel panel-primary" >
                                     <div  class="panel-heading" style=" text-align: center;" >List of Kira Vision Partners</div>
                                     <div class="panel-body" id="clientprincipals" >
                                         <ui:include src="listPartners.xhtml"/>
-                                        
+
                                     </div>
                                 </div>
                             </div>
                         </span> 
                     </h:panelGroup>  
-                    
-                    
+
+
                 </div>
-                
-            
-                         
-        
-                
-                
-                
-         
-                
-                
+
+
+
+
+
+
+
+
+
+
             </div>
         </div>
-        
-        
-        
-       
-        
-        
-        
-        
-        
-     
-        
-        <!-- end of calculating premium for principal member -->
-        
-        
-        
-       
-          
-        
- </h:body>       
-    
+
+
+
+
+
+        <!-- Modal new customer-->
+         
+        <div id="newpartnerModal" class="modal fade " role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+               
+                <div class="modal-content">
+                    <div class="modal-header bg-info">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">New Partner</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ui:include src="newPartner.xhtml"/>
+                    </div>
+                    <div class="modal-footer bg-primary">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- end new modal customer -->        
+
+        <!-- Modal for customer Editing -->
+
+        <div id="editpartnerModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content modal-lg">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Editing Partner</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ui:include src="editPartner.xhtml"/>
+                    </div>
+                    <div class="modal-footer bg-primary">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+ <!-- end for customer editing -->
+
+<!-- Modal for customer Details -->
+
+        <div id="detailscustomerModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content modal-lg">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Partner Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ui:include src="partnerDetails.xhtml"/>
+                    </div>
+                    <div class="modal-footer bg-primary">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+   <!-- end for customer editing -->
+
+
+
+
+
+    </h:body>       
+
 </html>
 

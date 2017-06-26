@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://gateway.esicia.com/soap/ksms" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://gateway.esicia.com/soap/ksms">
+<types>
+<xsd:schema targetNamespace="http://gateway.esicia.com/soap/ksms"
+>
+ <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+ <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+ <xsd:complexType name="ksendRequestType">
+  <xsd:all>
+   <xsd:element name="account" type="xsd:string" form="unqualified"/>
+   <xsd:element name="pin" type="xsd:string" form="unqualified"/>
+   <xsd:element name="sender" type="xsd:string" form="unqualified"/>
+   <xsd:element name="message" type="xsd:string" form="unqualified"/>
+   <xsd:element name="phone" type="xsd:string" form="unqualified"/>
+   <xsd:element name="msgid" type="xsd:string" form="unqualified"/>
+   <xsd:element name="receivedlr" type="xsd:string" form="unqualified"/>
+   <xsd:element name="callurl" type="xsd:string" form="unqualified"/>
+   <xsd:element name="messagetype" type="xsd:string" form="unqualified"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="ksendResponseType">
+  <xsd:all>
+   <xsd:element name="success" type="xsd:string" form="unqualified"/>
+   <xsd:element name="message" type="xsd:string" form="unqualified"/>
+   <xsd:element name="msgid" type="xsd:string" form="unqualified"/>
+   <xsd:element name="cost" type="xsd:string" form="unqualified"/>
+   <xsd:element name="balance" type="xsd:string" form="unqualified"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="kchkRequestType">
+  <xsd:all>
+   <xsd:element name="account" type="xsd:string" form="unqualified"/>
+   <xsd:element name="pin" type="xsd:string" form="unqualified"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="kchkResponseType">
+  <xsd:all>
+   <xsd:element name="reply" type="xsd:string" form="unqualified"/>
+   <xsd:element name="balance" type="xsd:string" form="unqualified"/>
+   <xsd:element name="status" type="xsd:string" form="unqualified"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="kchangeRequestType">
+  <xsd:all>
+   <xsd:element name="account" type="xsd:string" form="unqualified"/>
+   <xsd:element name="newpin" type="xsd:string" form="unqualified"/>
+   <xsd:element name="pin" type="xsd:string" form="unqualified"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="kchangeResponseType">
+  <xsd:all>
+   <xsd:element name="reply" type="xsd:string" form="unqualified"/>
+   <xsd:element name="status" type="xsd:string" form="unqualified"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:element name="ksend" type="tns:ksendRequestType"/>
+ <xsd:element name="ksendResponse" type="tns:ksendResponseType"/>
+ <xsd:element name="kchk" type="tns:kchkRequestType"/>
+ <xsd:element name="kchkResponse" type="tns:kchkResponseType"/>
+ <xsd:element name="kchange" type="tns:kchangeRequestType"/>
+ <xsd:element name="kchangeResponse" type="tns:kchangeResponseType"/>
+</xsd:schema>
+</types>
+<message name="ksendRequest">
+  <part name="parameters" element="tns:ksend" /></message>
+<message name="ksendResponse">
+  <part name="parameters" element="tns:ksendResponse" /></message>
+<message name="kchkRequest">
+  <part name="parameters" element="tns:kchk" /></message>
+<message name="kchkResponse">
+  <part name="parameters" element="tns:kchkResponse" /></message>
+<message name="kchangeRequest">
+  <part name="parameters" element="tns:kchange" /></message>
+<message name="kchangeResponse">
+  <part name="parameters" element="tns:kchangeResponse" /></message>
+<portType name="ksmsPortType">
+  <operation name="ksend">
+    <documentation>This service is about sending sms</documentation>
+    <input message="tns:ksendRequest"/>
+    <output message="tns:ksendResponse"/>
+  </operation>
+  <operation name="kchk">
+    <documentation>This service is about checking the remaining sms balance</documentation>
+    <input message="tns:kchkRequest"/>
+    <output message="tns:kchkResponse"/>
+  </operation>
+  <operation name="kchange">
+    <documentation>This service is about changing the PIN of your soap account</documentation>
+    <input message="tns:kchangeRequest"/>
+    <output message="tns:kchangeResponse"/>
+  </operation>
+</portType>
+<binding name="ksmsBinding" type="tns:ksmsPortType">
+  <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="ksend">
+    <soap:operation soapAction="urn:ksend" style="document"/>
+    <input><soap:body use="literal" namespace="urn:ksms"/></input>
+    <output><soap:body use="literal" namespace="urn:ksms"/></output>
+  </operation>
+  <operation name="kchk">
+    <soap:operation soapAction="urn:kchk" style="document"/>
+    <input><soap:body use="literal" namespace="urn:ksms"/></input>
+    <output><soap:body use="literal" namespace="urn:ksms"/></output>
+  </operation>
+  <operation name="kchange">
+    <soap:operation soapAction="urn:kchange" style="document"/>
+    <input><soap:body use="literal" namespace="urn:ksms"/></input>
+    <output><soap:body use="literal" namespace="urn:ksms"/></output>
+  </operation>
+</binding>
+<service name="ksms">
+  <port name="ksmsPort" binding="tns:ksmsBinding">
+    <soap:address location="http://gateway.esicia.com/"/>
+  </port>
+</service>
+</definitions>

@@ -77,7 +77,7 @@ public class KiraVisionUssd  extends HttpServlet{
                     getKirasessionManager().terminateMisdnSession(urb.getMsisdn(), un);
                }
                 
-                if(urb.getInput().trim().equals("820*200"))
+                if(urb.getNew_request().equals("1"))
                 {
                 if(un==null) // nothing in the session
                 {
@@ -91,7 +91,7 @@ public class KiraVisionUssd  extends HttpServlet{
                    urs.setMenus(languages);
                    urs.setFreeFlow("FC");
                   urs.setSessionId(urb.getSessionId());
-                   urs.setNew_request(urb.getNew_request());
+                   urs.setNew_request("0");
                    urs.setSpId(urb.getSpId());
                    
                 
@@ -259,8 +259,8 @@ public class KiraVisionUssd  extends HttpServlet{
                    
                 String clienturl = "http://localhost:8080/KiraVision/cardholder/cardholderphonepin/"+urb.getMsisdn().substring(2)+"/"+urb.getInput();
                  Response responseclient = CommonLibrary.sendRESTRequest(clienturl, "", MediaType.APPLICATION_XML, "GET");
-              CardHolder cardholder=new CardHolder();
-                 if(responseclient.getStatus()==200)
+              CardHolder cardholder;
+       if(responseclient.getStatus()==200)
                {
                  String clixml= responseclient.readEntity(String.class);
                 cardholder=(CardHolder)CommonLibrary.unmarshalling(clixml,CardHolder.class);

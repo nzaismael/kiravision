@@ -36,7 +36,7 @@ public class PartnerController implements Serializable{
     {
       String partnersUrl="http://localhost:8080/KiraVision/merchant/merchants";
         Response response = CommonLibrary.sendRESTRequest(partnersUrl, " ", MediaType.TEXT_PLAIN,"GET");
-    System.out.println("in the list of Partners");
+   
 if(response.getStatus()==200)
 {
             String partnerXml = response.readEntity(String.class);
@@ -45,11 +45,10 @@ if(response.getStatus()==200)
             mb = (MerchantBeans)CommonLibrary.unmarshalling(partnerXml, MerchantBeans.class);
             this.setMerchants(mb);
             
-}   
-this.setLeftPage("partnersStatistics.xhtml");
-this.setLeftPageTitle("Statistics on Kira Vision Partners");
- FacesContext.getCurrentInstance().getExternalContext().redirect("/KiraVisionWeb/partners/partnersIndex.xhtml");
- 
+}  
+ this.setMerchant(new MerchantBean());
+FacesContext.getCurrentInstance().getExternalContext().redirect("/KiraVisionWeb/partners/partnersIndex.xhtml");
+
    return null;  
    }
     
@@ -127,6 +126,13 @@ else
    
     }
  }
+ 
+ public String resetPartner(MerchantBean partner)
+ {
+     this.setMerchant(partner);
+     return null;
+ }
+ 
     
     /**
      * @return the merchant

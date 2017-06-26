@@ -9,35 +9,46 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 @SessionScoped
 @ManagedBean(name="user")
+
 @XmlRootElement(name="user")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User implements Serializable {
-
-    public User()
-    {
-        
-    }
-private String userId; 
  
+ @XmlElement(name="ID",nillable=true)
+private String userId; 
+  
+  @XmlElement(name="NAME")
 private String username;
   
+  @XmlElement(name="SURNAME",nillable=true)
 private String userSurname;
-  
+  @Temporal(TemporalType.TIMESTAMP)
+  @XmlElement(name="CREATEDON")
 private java.util.Date createdOn;
- 
+  @Temporal(TemporalType.TIMESTAMP)
+  @XmlElement(name="MODIFIEDON")
 private java.util.Date modifiedOn;
- 
+  @Column(length=40,nullable=false)
+  @XmlElement(name="SECRET",nillable=true)
 private String userPin;
+  @XmlElement(name="STATUS")
   private boolean status;
   
-  
+  @XmlElement(name="MOBILE",nillable=true)
   private String mobileNumber;
   
+  @XmlElement(name="EMAIL",nillable=true)
   private String userEmail;
   
    /**

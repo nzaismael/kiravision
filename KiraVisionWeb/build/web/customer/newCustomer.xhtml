@@ -19,9 +19,12 @@
   
     </h:head>
     <h:body>
-        <pp:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
+       
         <h:form>
-            <h:outputText value="Phone number of Parent: "/> <pp:inputText value="#{customer.cardHolder.parent.agentPhone}" > 
+          <div class="panel panel-primary" >
+                           <div  class="panel-heading" style=" text-align: center;" ><h:outputText value="#{customer.leftPageTitle}"/></div>
+                                    <div class="panel-body" id="details" >
+             <h:outputText value="Phone number of Parent: "/> <pp:inputText value="#{customer.cardHolder.parent.agentPhone}" > 
                  <a4j:ajax   listener="#{customer.customerParenthoud()}" render="agent" />
              </pp:inputText>
             <h:panelGroup id="agent">
@@ -62,6 +65,9 @@
          
        
        </div>
+       
+       </div>
+  </div>  
        </h:form> 
            
     </h:body>

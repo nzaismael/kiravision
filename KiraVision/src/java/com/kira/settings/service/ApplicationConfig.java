@@ -33,6 +33,8 @@ public class ApplicationConfig extends Application {
         resources.add(com.kira.services.CardHolderREST.class);
         resources.add(com.kira.services.CommercialAgentREST.class);
         resources.add(com.kira.services.MerchantREST.class);
+        resources.add(com.kira.services.PurchaseRest.class);
+        resources.add(com.kira.settings.service.PartnerBranchService.class);
         resources.add(com.kira.settings.service.UserFacadeREST.class);
     }
     

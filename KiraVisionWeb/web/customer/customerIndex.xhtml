@@ -5,129 +5,163 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:rich="http://richfaces.org/rich"
       xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
     <h:head>
-       <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    
-    <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
-    
-    <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
         <link href="../design/css/chosen.css" rel="stylesheet" type="text/css"/>
-         
-        <script>
-                  
+
+        <script type="text/javascript">
+
+            function openModal(modale) {
+
+                $(modale).modal();
+            }
+            function closeModal(modale)
+            {
+                $(modale).modal('hide');
+            }
         </script>
     </h:head>
     <h:body>
-        <h:form>
 
- 
+        <h:panelGroup id="customerData">
+
+            <div class="col-xs-12 col-sm-12 holderbox">
+
+                <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:300px;">
+
+                    <span class="container-fluid" style="overflow: auto;">
+                        <h:panelGroup >
+                            <table class="table table-hover table-striped" id="serviceproviderstb" >
+                                <thead>
+                                    <tr>
+                                        <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1 ' width="5px">Counter</th>
+
+                                        <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1' width="50">Customer Names</th>
+                                        <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Telephone</th>
+                                        <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Email</th>
+                                        <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Recruitment Date</th>
+                                        <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Actions</th>
+                                        <!--  <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>-</th>
+                                            <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>-</th>
+                                            <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>-</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody class='row'> 
+                                    <c:forEach items="#{customer.cardholders}" var="cu" varStatus="cus" >
+
+                                        <tr>
+                                            <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'  style="width:5%;">
+                                                <h:outputText value="#{cus.index+1}">
+                                                </h:outputText>
+
+                                            </td>
+
+                                            <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{cu.clientName} #{cu.clientSurname}</td>
+                                            <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{cu.clientPhone}</td>
+                                            <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{cu.clientEmail}</td>
+
+                                            <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>
+                                                <h:outputText value="#{cu.createdOn}">
+                                                    <f:convertDateTime pattern="dd, MMM, yyyy"/>
+                                                </h:outputText>
+
+                                            </td>
+
+                                            <td>
+
+                                                <h:form id="ediform#{cu.clientId}">   
+                                                    <ul class="icons-list">
+                                                        <li class="dropdown list-unstyled"><a href="#"
+                                                                                              class="dropdown-toggle" data-toggle="dropdown" ><i
+                                                                    class="glyphicon glyphicon-list"></i></a>
+                                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                                <li><a4j:commandLink  action="#{customer.editCustomer(cu)}" oncomplete="javascript:openModal('#editcustomerModal')" render=":editcustomerPanel">    <i class="glyphicon glyphicon-edit"></i> Edit</a4j:commandLink></li>
+                                                                <li><a4j:commandLink  action="#{customer.insidenavigationDetails(cu)}" oncomplete="javascript:openModal('#detailscustomerModal')" render=":detailscustomerPanel"><i class="glyphicon glyphicon-menu-hamburger"></i> Details</a4j:commandLink></li>
+                                                                <li><a href="javascript:void(0)"   ><i class="glyphicon glyphicon-stats"></i> Statistics</a></li>
 
 
-<h:panelGroup id="customerData">
-    
-                    <div class="col-xs-12 col-sm-12 holderbox">
-                        
-                        <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:300px;">
-                            
-                            <span class="container-fluid" style="overflow: auto;">
-                                <h:panelGroup >
-                                    <table class="table table-hover table-striped" id="serviceproviderstb" >
-                                        <thead>
-                                            <tr>
-                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1 ' width="5px">Counter</th>
-                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1' width="2px">Id</th>
-                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1' width="50">Customer Names</th>
-                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Telephone</th>
-                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Email</th>
-                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Recruitment Date</th>
-                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>-</th>
-                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>-</th>
-                                                  <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>-</th>
-                                                  <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>-</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class='row'> 
-                                            <c:forEach items="#{customer.cardholders}" var="cu" varStatus="cus" >
-                                                     
-                                                <tr>
-                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'  style="width:5%;">
-                                                        <h:outputText value="#{cus.index+1}">
-                                                        </h:outputText>
-                                                        
-                                                    </td>
-                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{cu.clientId}</td>
-                                                    
-                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{cu.clientName} #{cu.clientSurname}</td>
-                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{cu.clientPhone}</td>
-                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{cu.clientEmail}</td>
-                                                    
-                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>
-                                                        <h:outputText value="#{cu.createdOn}">
-                                                         <f:convertDateTime pattern="dd, MMM, yyyy"/>
-                                                        </h:outputText>
-                                                    
-                                                    </td>
-                                                    
-                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'><p:commandLink value="Details" class="text-success" update="customerside" action='#{customer.insidenavigationDetails("customerDetails.xhtml", "Details of the Customer",cu)}'/></td>   
-                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'><a4j:commandLink  value="Edit"/></td>   
-                                                     <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'><a4j:commandLink value="Transactions"/></td>   
-                                                   
-                                                  <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'><a4j:commandLink value="Card Details"/></td>   
-                                                   
-                                                    
-                                                </tr>
-                                            
-                                   </c:forEach>
-                                                
-                                                            
-                                                
-                                                
-                                          
-                                            
-                                            
-                                        </tbody> 
-                                       
-                                        
-                                    </table>
-                                    
-                                    
-                                </h:panelGroup>
-                                
-                                
-                            </span>
-                        </div>
-                        
-                    </div>
-                    <script type="text/javascript">
-                   
-                        var  table=  $('#serviceproviderstb').dataTable({
-                        
-                            "autoWidth": false,  
-                            "sPaginationType": "full_numbers",
-                            "destroy":true,
-                            "order": [[ 0, 'asc' ]],
-                            "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]]
-                        
-                        
-                        } );
-                    
-                    
-                    
-                    
-                    </script>
-                    
-                </h:panelGroup>  
-        
-        
-   
-      </h:form>  
+                                                                <li><a href="#">
+                                                                        <i class="glyphicon glyphicon-stop text-danger"></i>  Kira Card</a></li>
+                                                                <c:choose>
+                                                                    <c:when test="#{cu.status}">
+                                                                        <li><a href="#">
+                                                                                <i class="glyphicon glyphicon-remove-circle text-danger"></i>
+                                                                                Deactivate</a></li>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <li><a href="#">
+                                                                                <i class="glyphicon glyphicon-check text-danger"></i>
+                                                                                Activate</a></li> 
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                <li class="divider "></li>
+                                                                <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Transactions</a></li>
+                                                                <li><a href="#"><i class="glyphicon glyphicon-print"></i> Repports</a></li>
+                                                                <li class="divider"></li>
+
+                                                            </ul></li>
+                                                    </ul>
+
+                                                </h:form>
+
+                                            </td>
+
+                                        </tr>
+
+                                    </c:forEach>
+
+
+
+
+
+
+
+                                </tbody> 
+
+
+                            </table>
+
+
+                        </h:panelGroup>
+
+
+                    </span>
+                </div>
+
+            </div>
+            <script type="text/javascript">
+
+                var table = $('#serviceproviderstb').dataTable({
+
+                    "autoWidth": false,
+                    "sPaginationType": "full_numbers",
+                    "destroy": true,
+                    "order": [[0, 'asc']],
+                    "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]]
+
+
+                });
+
+
+
+
+            </script>
+
+        </h:panelGroup>  
+
+
+
+
     </h:body>
 </html>
 
