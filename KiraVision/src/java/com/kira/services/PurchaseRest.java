@@ -5,15 +5,22 @@
  */
 package com.kira.services;
 
+import com.kira.beans.CommissionDetail;
+import com.kira.beans.CommissionsDetails;
 import com.kira.beans.NewPurchase;
-import com.kira.beans.PurchaseResponsePOS;
 import com.kira.ejbs.PurchasesEjb;
+import com.kira.entities.PurchaseCommissionsDetail;
 import com.kira.ussd.utilities.CommonLibrary;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import org.codehaus.jackson.map.ObjectMapper;
 
 /**
@@ -37,5 +44,35 @@ public class PurchaseRest {
       return  purchasesEjb.newTransaction(purchase);
         
     }
-    
+ 
+    @Path("/purchasestransactions")
+    @GET
+//    @Produces(MediaType.APPLICATION_XML)
+    public String getPurchaseTransactions() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        List<CommissionDetail> comdet= new ArrayList<>();
+        List<PurchaseCommissionsDetail> coms = new ArrayList<>();
+        coms =purchasesEjb.purchases();
+      //  if(coms!=null && coms.size()>0)
+        //{
+        coms.parallelStream()
+                .map(com->{
+                return new CommissionDetail(com);
+                })
+              .forEach(comdet::add);
+        
+        
+        
+      CommissionsDetails comdets = new CommissionsDetails();       
+        comdets.setComdetails(comdet);
+        System.out.println("in the service "+comdets.getComdetails().size());
+     return    mapper.writeValueAsString(comdets);
+     //return  comdets;
+    // }
+      //  else
+         //   return null;
+     
+     
+    }
 }

@@ -77,12 +77,9 @@
                         <rich:panel header="Account Operations">
                             <h:panelGroup id="accountside">
 
-                                <p:commandButton  action="#{accountController.listAccountsMenu()}" id="listaccountsbutton1" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="List of Accounts"/>
-                                <p:commandButton  action="#{accountController.accountOperationMenu()}" id="listaccountsbutton3" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid,:listaccouuntsform" value="Accounting Operation"/>
-                              <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton4" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Daily Operations"/>
-                              <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton5" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="End of the Day"/>
-                               <p:commandButton  action="#{accountController.haveListofAccounts()}" id="listaccountsbutton6" class="btn btn-primary " style=" width: 100%; text-align: left"  update="listaccountsid" value="Transactions"/>
-                                                             
+                                <a4j:commandButton  action="#{accountController.listAccountsMenu()}" id="listaccountsbutton1" class="btn btn-primary " style=" width: 100%; text-align: left"  render=":listaccountsid" value="List of Accounts"/>
+                               <a4j:commandButton  action="#{accountController.transactions()}" id="listaccountsbutton7" class="btn btn-primary " style=" width: 100%; text-align: left"  render=":listaccountsid" value="Transactions1"/>
+                                                          
                             </h:panelGroup>
                         </rich:panel>
                     </h:form>

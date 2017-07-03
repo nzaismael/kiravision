@@ -5,6 +5,7 @@
  */
 package com.kira.ejbs;
 
+import com.kira.beans.CommissionDetail;
 import com.kira.beans.NewPurchase;
 import com.kira.beans.PurchaseResponsePOS;
 import com.kira.beans.SendParameter;
@@ -21,6 +22,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.core.MediaType;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -75,18 +77,43 @@ public class PurchasesEjb {
         em.persist(comdet);
       }
      
-      String smsurl ="http://localhost:8080/KiraVisionSms/smsnotification/newsms";
-     SendParameter sendp = new SendParameter();
-     sendp.setAccount("brd");
-     sendp.setMessage(" Test Transaction ");
-      sendp.setPhone("+250788499191");
-      sendp.setPin("6m1z4d1o5x6o");
-      sendp.setSender("BRD");
+    // Asychroneous sms forwarding
       
+      class sendingSMS implements Runnable
+              {
+               public void run()
+               {
+     String smsurl ="http://localhost:8080/KiraVisionSms/smsnotification/newsms";
+     SendParameter sendp = new SendParameter();
+     sendp.setAccount("kvl");
+     sendp.setMessage("Patience with the SMS. We are testing kira Vision SMS system. Any inconvenience call 0788636644, Nzamutuma Ismael ");
+     // sendp.setPhone(CommonLibrary.FormatPhone(purchase.getClient().getClientPhone()));
+     sendp.setPhone("+250788636644");
+     sendp.setPin("7d1q0u3l1n9a");
+      sendp.setSender("KIRA VISION");
+      /*
+      SentMessages sendMessages = new SentMessages();
+      sendMessages.setCardHolder(purchase.getClient());
+      sendMessages.setPhone(sendp.getPhone());
+      sendMessages.setMessage(sendp.getMessage());
+      em.persist(sendMessages);
+      em.flush();
+      */
       String xml = CommonLibrary.marchalling(sendp, SendParameter.class);
       CommonLibrary.sendRESTRequest(smsurl, xml, MediaType.APPLICATION_XML,"POST");
-      
-      
+   //  String smsresponsexml = response.readEntity(String.class);
+  //   System.out.println(smsresponsexml);
+   /*  SendResponseParameter sendResponseParameter=(SendResponseParameter)CommonLibrary.unmarshalling(smsresponsexml, SendResponseParameter.class);
+     sendMessages.setBalance(Double.parseDouble(sendResponseParameter.getBalance()));
+     sendMessages.setCost(Double.parseDouble(sendResponseParameter.getCost()));
+     sendMessages.setSuccess(sendResponseParameter.getSuccess());
+     em.merge(sendMessages);*/
+     
+               }
+              } // end inner class for SMS sending
+      Thread thread = new Thread(new sendingSMS()); // thread is created to send SMS
+     thread.start(); // thread has started . the System will not wait until the sms is sent instead it i will return on its own.
+     // Asychroneous sms forwarding 
       ObjectMapper mapper = new ObjectMapper();
       PurchaseResponsePOS rsp = new PurchaseResponsePOS();
         rsp.setPurchaseDesc("Success");
@@ -102,5 +129,19 @@ public class PurchasesEjb {
        
        // purchase.setClient(cardHolder.getcardHolderbyPhone(phone));
     }
+   
+   public List<PurchaseCommissionsDetail> purchases()
+   {
+    Query query = em.createQuery("select pd from PurchaseCommissionsDetail pd ");
+  //  List<PurchaseCommissionsDetail> coms =query.getResultList();
+    //CommissionsDetails comdes = new CommissionsDetails();
+  //  System.out.println(query.getResultList().size());
+    
+    return query.getResultList();
+       
+      
+   }
+    
+    
     
 }

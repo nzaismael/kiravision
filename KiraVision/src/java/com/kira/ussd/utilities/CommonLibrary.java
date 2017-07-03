@@ -159,6 +159,25 @@ public class CommonLibrary {
         
     }
     
-    
+  public static String FormatPhone(String phone)
+  {
+      if(phone.trim().startsWith("07"))
+      {
+        return "+25"+phone ; 
+      }
+      else if(phone.trim().startsWith("02507"))
+      {
+          return "+0"+phone.trim().substring(1);
+      }
+      else if(phone.trim().startsWith("00250"))
+      {
+          return "+"+phone.trim().substring(2);
+      }
+      else
+      {
+          return phone;
+      }
+     
+  }
     
 }

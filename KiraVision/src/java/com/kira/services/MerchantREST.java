@@ -70,9 +70,16 @@ public MerchantReduction getMerchantcontract(@PathParam("merchantId")long mercha
 @Consumes(MediaType.APPLICATION_XML)
 public MerchantReduction addNewMerchantContract(MerchantReduction contract)
 {
-    System.out.println("im in the contract saving");
+   // System.out.println("im in the contract saving");
     return contractejb.addMerchantContract(contract);
 }  
-
-
+@Path("/editmerchant")
+@POST
+@Consumes(MediaType.APPLICATION_XML)
+@Produces(MediaType.APPLICATION_XML)
+public MerchantBean editingMerchantBean(MerchantBean partner)
+{
+    partner.setMerchantModifiedOn(new java.util.Date());
+  return  merchantEjb.editMerchant(partner);
+}
 }

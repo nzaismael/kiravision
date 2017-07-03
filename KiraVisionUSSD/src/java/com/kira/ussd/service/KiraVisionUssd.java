@@ -34,7 +34,7 @@ import ussd.kira.messageResources.BundleResourceManager;
  *
  * @author Hp
  */
-@WebServlet(name = "KiraVisionUssdServlet", urlPatterns = {"/ussd/kira"})
+@WebServlet(name = "KiraVisionUssdServlet", urlPatterns = {"/kiravision/ussd/kira"})
 public class KiraVisionUssd  extends HttpServlet{
     
     @EJB private KiraSessionManager kirasessionManager;

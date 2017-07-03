@@ -20,7 +20,7 @@ public class SendParameter {
 
     
     private String account;
- 
+   
     private String pin;
     
     private String sender;
@@ -98,6 +98,7 @@ public class SendParameter {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
 
     
 }

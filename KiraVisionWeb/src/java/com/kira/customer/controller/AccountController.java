@@ -7,6 +7,8 @@ package com.kira.customer.controller;
 
 import com.kira.customer.beans.AccountBean;
 import com.kira.customer.beans.AccountsBean;
+import com.kira.customer.beans.CommissionDetail;
+import com.kira.customer.beans.CommissionsDetails;
 import com.kira.ussd.utilities.CommonLibrary;
 import com.settings.beans.AccountType;
 import com.settings.beans.AccountTypes;
@@ -49,6 +51,8 @@ public class AccountController implements Serializable {
      private BankBean bank =new BankBean();
      private AccountType accountSchema = new AccountType();
      private AccountTypes accountSchemas = new AccountTypes();
+     private CommissionDetail commissionDetail = new CommissionDetail();
+     private CommissionsDetails commissionsDetails = new CommissionsDetails();
      
     @ManagedProperty(value = "#{login}")
     private LoginController login;
@@ -101,6 +105,10 @@ public class AccountController implements Serializable {
         //System.out.println(getLogin().getLoginUser().getUsername());
         return null;
     }
+    
+    
+    
+    
   
 public void changeAccountType(AjaxBehaviorEvent event)
 {
@@ -215,6 +223,25 @@ public String accountOperationMenu() throws Exception
     
     return null;
 }
+
+public String transactions()
+{
+    String purchasesurl = "http://localhost:8080/KiraVision/purchases/purchasestransactions";
+    Response response = CommonLibrary.sendRESTRequest(purchasesurl, "", MediaType.TEXT_PLAIN, "GET");
+    if(response.getStatus()==200)
+    {
+     String xml=  response.readEntity(String.class);
+       this.setCommissionsDetails((CommissionsDetails)CommonLibrary.unmarshalling(xml, CommissionsDetails.class));
+    }
+    else
+    {
+        System.out.println(response.getStatus());
+    }
+   this.setContentPage("transactions.xhtml");
+        this.setPageTitle("Transactions");  
+    return null;
+}
+
 
     /**
      * @return the pageTitle
@@ -368,5 +395,33 @@ public String accountOperationMenu() throws Exception
      */
     public void setAccountSchemas(AccountTypes accountSchemas) {
         this.accountSchemas = accountSchemas;
+    }
+
+    /**
+     * @return the commissionDetail
+     */
+    public CommissionDetail getCommissionDetail() {
+        return commissionDetail;
+    }
+
+    /**
+     * @param commissionDetail the commissionDetail to set
+     */
+    public void setCommissionDetail(CommissionDetail commissionDetail) {
+        this.commissionDetail = commissionDetail;
+    }
+
+    /**
+     * @return the commissionsDetails
+     */
+    public CommissionsDetails getCommissionsDetails() {
+        return commissionsDetails;
+    }
+
+    /**
+     * @param commissionsDetails the commissionsDetails to set
+     */
+    public void setCommissionsDetails(CommissionsDetails commissionsDetails) {
+        this.commissionsDetails = commissionsDetails;
     }
 }

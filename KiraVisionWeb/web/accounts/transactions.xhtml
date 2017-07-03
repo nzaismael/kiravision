@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+       
+         <table class="table table-hover table-striped" id="purchasestb" >
+                                        <thead>
+                                            <tr>
+                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Counter</th>
+                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Commission Name</th>
+                                                <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Amount</th>
+                                                
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody class='row'> 
+                                            <c:forEach items="#{accountController.commissionsDetails.comdetails}" var="coms" varStatus="comss" > 
+                                                
+                                                <tr>
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'  style="width:2%;">
+                                                        <h:outputText value="#{comss.index+1}">
+                                                        </h:outputText>
+                                                        
+                                                    </td>
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{coms.commissionName}</td>
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{coms.amount}</td>
+                                                     
+                                                    
+       
+                                                    
+                                                </tr>
+                                                
+                                                
+                                                
+                                            </c:forEach> 
+                                            
+                                            
+                                        </tbody> 
+                                        
+                                        
+                                    </table>  
+        
+        
+    </h:body>
+</html>
+

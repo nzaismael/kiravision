@@ -11,6 +11,8 @@ import com.kira.customer.beans.MerchantReduction;
 import com.kira.ussd.utilities.CommonLibrary;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -105,10 +107,10 @@ else
  
  public void addNewPertnerContract()
  {
-     this.getContract().setMerchant(this.getMerchant());
+    this.getContract().setMerchant(this.getMerchant());
     String xml = CommonLibrary.marchalling(this.getContract(), MerchantReduction.class);
     String contracturl = "http://localhost:8080/KiraVision/merchant/merchantnewcontract";
-    System.out.println(xml);
+   // System.out.println(xml);
     Response response = CommonLibrary.sendRESTRequest(contracturl, xml, MediaType.APPLICATION_XML, "POST");
   int status = response.getStatus();
   System.out.println(status);
@@ -127,9 +129,28 @@ else
     }
  }
  
- public String resetPartner(MerchantBean partner)
+ public String resetPartner(MerchantBean partnerparam)
  {
-     this.setMerchant(partner);
+     this.setMerchant(partnerparam);
+     return null;
+ }
+ 
+ public String editPartner()
+ {
+     System.out.println("in this edit method");
+     // this.getMerchant();
+    String xml = CommonLibrary.marchalling(this.getMerchant(), MerchantBean.class);
+    String merchanturl = "http://localhost:8080/KiraVision/merchant/editmerchant";
+    //System.out.println(xml);
+    Response response = CommonLibrary.sendRESTRequest(merchanturl, xml, MediaType.APPLICATION_XML, "POST");
+  xml = response.readEntity(String.class);
+  List<MerchantBean> partners= this.getMerchants().getMerchants().stream()
+                                .filter(p->!p.getMerchantId().equals(this.getMerchant().getMerchantId()))
+                                .collect(Collectors.toList());
+  partners.set(0, this.getMerchant());
+  this.getMerchants().setMerchants(partners);
+  this.setMerchant(new MerchantBean());
+   
      return null;
  }
  

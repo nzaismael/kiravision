@@ -13,7 +13,7 @@
         <h:form>
             <h:panelGroup id="editcustomerPanel">
           <div class="panel panel-primary" >
-                           <div  class="panel-heading" style=" text-align: center;" ><h:outputText value="#{customer.leftPageTitle}"/></div>
+              <div  class="panel-heading" style=" text-align: center;" ><h:outputText value="#{customer.leftPageTitle} #{customer.verification}"/></div>
                                     <div class="panel-body" id="details" >
             
             <h:panelGroup id="agent">
@@ -46,7 +46,7 @@
                                
                              <td colspan="2">
                                    <h:commandButton  value="Save  Customer" class="btn btn-primary"   >
-                                       <a4j:ajax execute="@form" render=":listcustomersside"  listener="#{customer.saveEditingCustomer()}" oncomplete="javascript:closeModal()"  immediate="false"/>
+                                       <a4j:ajax execute="@form" render=":customerData"  listener="#{customer.saveEditingCustomer()}" oncomplete="javascript:closeModal('#editcustomerModal')" />
                                    </h:commandButton>
                                    
                                </td>   

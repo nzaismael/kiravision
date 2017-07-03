@@ -28,7 +28,8 @@ import javax.ws.rs.core.Response;
 @ManagedBean(name = "customer")
 public class CustomerController implements Serializable {
 
-    private List<CardHolder> cardholders = new ArrayList();
+    //private List<CardHolder> cardholders = new ArrayList();
+    private CardHolders cardHolders = new CardHolders();
     private CardHolder cardHolder = new CardHolder();
     private CommercialAgent commagent = new CommercialAgent();
     private CardHolder chparent;
@@ -52,9 +53,9 @@ public class CustomerController implements Serializable {
 
             CardHolders listCustomers = new CardHolders();
             listCustomers = (CardHolders) CommonLibrary.unmarshalling(customersxml, CardHolders.class);
-            setCardholders(listCustomers.getCustomers());
-            this.setLeftPageContent("customersStatistics.xhtml");
-            this.setLeftPageTitle("Customers Statistics");
+            this.setCardHolders(listCustomers);
+           
+  
         }
 
         FacesContext.getCurrentInstance().getExternalContext().redirect("/KiraVisionWeb/customer/customersIndex.xhtml");
@@ -109,7 +110,7 @@ public class CustomerController implements Serializable {
         }
 
         String cardHolderxml = CommonLibrary.marchalling(ch, CardHolder.class);
-        System.out.println("card holder :" + cardHolderxml);
+       
         String customersUrl = "http://localhost:8080/KiraVision/cardholder/newcardholder";
         Response response;
 
@@ -117,7 +118,8 @@ public class CustomerController implements Serializable {
         int status1 = response.getStatus();
         boolean saved = Boolean.parseBoolean(response.readEntity(String.class));
         if (response.getStatus() == 200) {
-            this.getCardholders().add(0, ch);
+            
+            this.getCardHolders().getCustomers().add(0, ch);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "New Customer added!"));
 
         } else {
@@ -154,7 +156,7 @@ public class CustomerController implements Serializable {
                 this.setChparent(new CardHolder());
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage());  
         }
 
         //System.out.println("in the parenthoud "+this.getCommagent().getAgentEmail());
@@ -162,7 +164,7 @@ public class CustomerController implements Serializable {
     }
 
     public void insidenavigationDetails(Object obj) {
-        
+     //   System.out.println(((CardHolder) obj).getClientSurname());
         this.setCardHolder((CardHolder) obj);
 
     }
@@ -172,7 +174,7 @@ public class CustomerController implements Serializable {
          this.setLeftPageTitle("Editing Customer Data");
         // FacesContext.getCurrentInstance().getExternalContext().
         this.setCardHolder(holder);
-
+        
         return null;
     }
     
@@ -184,11 +186,16 @@ public class CustomerController implements Serializable {
         String xml = CommonLibrary.marchalling(ch, CardHolder.class);
        
      String url= urlRoot+ "editcardholder/";
-     
+   //  System.out.println(xml);
      Response response = CommonLibrary.sendRESTRequest(url, xml, MediaType.APPLICATION_XML, "POST");
      if(response.getStatus()==200)
      {
-          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "The Customer Has been edited."));
+      // this.setCardHolder((CardHolder)CommonLibrary.unmarshalling(response.readEntity(String.class),CardHolder.class));
+       this.getCardHolders().getCustomers().remove(this.getCardHolder());
+       this.getCardHolders().getCustomers().add(0, this.getCardHolder());
+         
+         
+       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "The Customer Has been edited."));
 
      }
      else
@@ -198,20 +205,6 @@ public class CustomerController implements Serializable {
      }
      
         return null;
-    }
-
-    /**
-     * @return the cardholders
-     */
-    public List<CardHolder> getCardholders() {
-        return cardholders;
-    }
-
-    /**
-     * @param cardholders the cardholders to set
-     */
-    public void setCardholders(List<CardHolder> cardholders) {
-        this.cardholders = cardholders;
     }
 
     /**
@@ -324,6 +317,20 @@ public class CustomerController implements Serializable {
      */
     public void setChgrandchild(CardHolder chgrandchild) {
         this.chgrandchild = chgrandchild;
+    }
+
+    /**
+     * @return the cardHolders
+     */
+    public CardHolders getCardHolders() {
+        return cardHolders;
+    }
+
+    /**
+     * @param cardHolders the cardHolders to set
+     */
+    public void setCardHolders(CardHolders cardHolders) {
+        this.cardHolders = cardHolders;
     }
 
 }

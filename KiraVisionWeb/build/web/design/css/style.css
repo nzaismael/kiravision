@@ -206,15 +206,6 @@ table.innertable tbody tr:nth-child(even){margin-top:5px;border:0px solid red;ba
 table.innertable tbody tr:hover:nth-child(even){margin-top:5px;border:0px solid red;background-color:#f2f5e2;height:30px;color:#000000;cursor:pointer;}
 
 
-/*background:-moz-linear-gradient(left, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-background:-webkit-gradient(left top, right top, color-stop(0%, rgba(247,247,247,0)), color-stop(47%, rgba(247,247,247,0.47)), color-stop(100%, rgba(255,255,255,1))),
-background:-webkit-linear-gradient(left, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-background:-o-linear-gradient(left, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-background:-ms-linear-gradient(left, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-background:linear-gradient(to right, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#ffffff', GradientType=1 );border:0px;border-top:4px solid white;text-align:center;}
-*/
-
 table.innertablelong thead{border-bottom:0px solid white;color:#000000;font-size:11px;}
 table.innertablelong thead th{border:0px solid white;border-top:4px solid white;text-align:center;border-bottom:4px solid #c9c9c9;}
 table.innertablelong thead td{border:0px solid white;border-top:4px solid white;text-align:center;border-bottom:4px solid #c9c9c9;}
@@ -236,7 +227,7 @@ table.innertablelong tbody tr:nth-child(even){margin-top:5px;border:0px solid re
 table.innertablelong tbody tr:hover:nth-child(even){margin-top:5px;border:0px solid red;border-top:4px solid white;background-color:#f2f5e2;height:30px;color:#000000;cursor:pointer;}
 
 
-/* 
+
 
 table.innertablelong thead{border-bottom:0px solid white;color:#000000;font-size:11px;}
 table.innertablelong thead th{border:0px solid white;text-align:center;border-bottom:4px solid #c9c9c9;}
@@ -257,7 +248,7 @@ table.innertablelong tbody.row:hover:nth-child(odd){margin-top:5px;border:0px so
 table.innertablelong tbody.row:nth-child(even){margin-top:5px;border:0px solid red;background-color:#ececec;height:30px;color:#666666; }
 table.innertablelong tbody.row:hover:nth-child(even){margin-top:5px;border:0px solid red;background-color:#f2f5e2;height:30px;color:#000000;cursor:pointer;}
 
-*/
+
 
 /* TABLES POPUPS */
 table.innertable_popups {font-family:ubuntu;font-weight:normal;}

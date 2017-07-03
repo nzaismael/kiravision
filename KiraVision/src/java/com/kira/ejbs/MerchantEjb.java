@@ -38,18 +38,19 @@ public boolean addMerchant(MerchantBean merchant)
     }
 }
    
-    public boolean editMerchant(MerchantBean merchant)
+    public MerchantBean editMerchant(MerchantBean merchant)
     {
         try
         {
             merchant.setMerchantModifiedOn(new java.util.Date());
             
             em.merge(merchant);
-            return true;
+            em.flush();
+            return merchant;
         }
         catch(Exception e)
         {
-            return false;
+            return null;
         }
     }
     

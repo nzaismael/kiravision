@@ -6,8 +6,8 @@
     <rule>
         <set type="parameter" name="spId">342424</set>
         <set type="parameter" name="agentId">2</set>
-        <set type="parameter" name="centerUrl">http:\/\/10.171.1.53:8085\/USSDCenter\/centerUssd\/ussdRequest</set>
-                <from>/UssdRequestHandler003</from>
+        <set type="parameter" name="centerUrl">http:\/\/localhost:8080\/KiraVisionUSSD\/kiravision\/ussd\/kira</set>
+                <from>/ussdRequest</from>
         <to>/UssdRequestHandler</to>
     </rule>
 </urlrewrite>

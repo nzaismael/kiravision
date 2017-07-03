@@ -8,11 +8,9 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <h:head>
-        <link href="../design/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-
-        <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-
+        <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
@@ -30,18 +28,38 @@
                 $(modale).modal('hide');
             }
         </script>
+ 
+        <style>
+            /*
+tr.row_selected td
+{
+    background-color:orange !important;
+    color:blue;
+  font-weight:bolder;
+  font-size:larger;
+} */
+
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
+  
+  color:blue;
+  
+  font-size:larger;
+   font-weight:  bolder;
+}
+        </style>
     </h:head>
     <h:body>
 
         <h:panelGroup id="customerData">
-
+            <h:form>
             <div class="col-xs-12 col-sm-12 holderbox">
 
                 <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:300px;">
 
                     <span class="container-fluid" style="overflow: auto;">
                         <h:panelGroup >
-                            <table class="table table-hover table-striped" id="serviceproviderstb" >
+                            <table class="table table-hover table-striped" id="serviceproviderstb"   >
+       
                                 <thead>
                                     <tr>
                                         <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1 ' width="5px">Counter</th>
@@ -57,9 +75,9 @@
                                     </tr>
                                 </thead>
                                 <tbody class='row'> 
-                                    <c:forEach items="#{customer.cardholders}" var="cu" varStatus="cus" >
+                                    <c:forEach items="#{customer.cardHolders.customers}" var="cu" varStatus="cus" >
 
-                                        <tr>
+                                        <tr> 
                                             <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'  style="width:5%;">
                                                 <h:outputText value="#{cus.index+1}">
                                                 </h:outputText>
@@ -79,13 +97,13 @@
 
                                             <td>
 
-                                                <h:form id="ediform#{cu.clientId}">   
+                                               <!-- <h:form id="ediform#{cu.clientId}">   -->
                                                     <ul class="icons-list">
-                                                        <li class="dropdown list-unstyled"><a href="#"
-                                                                                              class="dropdown-toggle" data-toggle="dropdown" ><i
+                                                        <li class="dropdown list-unstyled">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i
                                                                     class="glyphicon glyphicon-list"></i></a>
                                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                                <li><a4j:commandLink  action="#{customer.editCustomer(cu)}" oncomplete="javascript:openModal('#editcustomerModal')" render=":editcustomerPanel">    <i class="glyphicon glyphicon-edit"></i> Edit</a4j:commandLink></li>
+                                                                <li><a4j:commandLink execute="@form" onclick=""   actionListener="#{customer.editCustomer(cu)}" oncomplete="javascript:openModal('#editcustomerModal')" render=":editcustomerPanel" >    <i class="glyphicon glyphicon-edit"></i> Edit</a4j:commandLink></li>
                                                                 <li><a4j:commandLink  action="#{customer.insidenavigationDetails(cu)}" oncomplete="javascript:openModal('#detailscustomerModal')" render=":detailscustomerPanel"><i class="glyphicon glyphicon-menu-hamburger"></i> Details</a4j:commandLink></li>
                                                                 <li><a href="javascript:void(0)"   ><i class="glyphicon glyphicon-stats"></i> Statistics</a></li>
 
@@ -112,7 +130,7 @@
                                                             </ul></li>
                                                     </ul>
 
-                                                </h:form>
+                                             <!--   </h:form>-->
 
                                             </td>
 
@@ -140,23 +158,34 @@
 
             </div>
             <script type="text/javascript">
-
-                var table = $('#serviceproviderstb').dataTable({
+$(document).ready(function() {
+               
+               var table=  $('#serviceproviderstb').dataTable({
 
                     "autoWidth": false,
                     "sPaginationType": "full_numbers",
                     "destroy": true,
                     "order": [[0, 'asc']],
                     "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]]
-
-
+                 
                 });
+                
+     $('#serviceproviderstb tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('success') ) {
+            $(this).removeClass('success');
+        }
+        else {
+            table.$('tr.success').removeClass('success');
+            $(this).addClass('success');
+        }
+    } );        
 
+});
 
 
 
             </script>
-
+</h:form>
         </h:panelGroup>  
 
 

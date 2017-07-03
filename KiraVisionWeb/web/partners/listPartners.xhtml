@@ -28,7 +28,7 @@
     <h:body>
 
 
-        <h:panelGroup id="refreshdata">
+        <h:panelGroup id="refreshpartner">
             <div class="col-xs-12 col-sm-12 holderbox">
 
                 <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:300px;">
@@ -39,7 +39,6 @@
                                 <thead>
                                     <tr>
                                         <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Counter</th>
-                                        <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Partner id</th>
                                         <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Partner Names</th>
                                         <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Telephone</th>
                                         <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>Email</th>
@@ -60,9 +59,7 @@
                                                 </h:outputText>
 
                                             </td>
-                                            <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{me.merchantId}</td>
-
-                                            <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{me.merchantName} #{me.merchantSurname}</td>
+                                           <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{me.merchantName} #{me.merchantSurname}</td>
                                             <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{me.merchantPhone}</td>
                                             <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{me.merchantEmail}</td>
 
@@ -87,7 +84,7 @@
 
 
                                                                 <li><a href="#">
-                                                                        <i class="glyphicon glyphicon-stop text-danger"></i>  Kira Card</a></li>
+                                                                        <i class="glyphicon glyphicon-stop text-danger"></i>  Branches</a></li>
                                                                 <c:choose>
                                                                     <c:when test="#{cu.status}">
                                                                         <li><a href="#">
@@ -101,7 +98,7 @@
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                                 <li class="divider "></li>
-                                                                <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Transactions</a></li>
+                                                                <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Devices</a></li>
                                                                 <li><a href="#"><i class="glyphicon glyphicon-print"></i> Repports</a></li>
                                                                 <li class="divider"></li>
 

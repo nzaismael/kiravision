@@ -86,7 +86,7 @@ public class UssdService {
     
     
     @POST
-    @Path("ussdRequest")
+    @Path("/ussdRequest")
     @Produces("text/plain")
     public Response preparemessage(InputStream is)
     {
