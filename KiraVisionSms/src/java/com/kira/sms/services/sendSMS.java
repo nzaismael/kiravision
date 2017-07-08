@@ -6,14 +6,19 @@
 package com.kira.sms.services;
 
 
+
+import com.esicia.gateway.soap.ksms.KsendRequestType;
+import com.esicia.gateway.soap.ksms.KsendResponseType;
+import com.esicia.gateway.soap.ksms.Ksms;
 import com.kira.sms.beans.SendParameter;
-import com.kira.sms.client.KsendRequestType;
-import com.kira.sms.client.Ksms;
+import java.io.InputStream;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -27,17 +32,32 @@ public class sendSMS {
   @POST
   @Path("newsms")
   @Consumes(MediaType.APPLICATION_XML)
-    public void sendnotification(SendParameter parameters)
+  @Produces(MediaType.APPLICATION_XML)
+    public void  sendnotification(SendParameter parameters)
     {
-        KsendRequestType ksend = new KsendRequestType();
-        ksend.setAccount(parameters.getAccount());
-        ksend.setMessage(parameters.getMessage());
-        ksend.setPhone(parameters.getPhone());
-        ksend.setPin(parameters.getPin());
-        ksend.setSender(parameters.getSender());
-        Ksms ksms = new Ksms();
-        ksms.getKsmsPort().ksend(ksend);
-   
+        KsendRequestType ksend1 = new KsendRequestType();
+        ksend1.setAccount(parameters.getAccount());
+        ksend1.setMessage(parameters.getMessage());
+        ksend1.setPhone(parameters.getPhone());
+        ksend1.setPin(parameters.getPin());
+        ksend1.setSender(parameters.getSender());
+        ksend1.setCallurl("");
+        ksend1.setMessagetype("");
+        ksend1.setMsgid("2");
+        ksend1.setReceivedlr("");
+        
+         Ksms ksms = new Ksms();
+     
+      ksms.getKsmsPort().ksend(ksend1);
+  
+  //  System.out.println(kresponse.getBalance()) ;
+     
+        
     }
-    
+    @Path("/smsresponse")
+    @POST
+ public void    receiveResponse(InputStream is)
+ {
+     System.out.println(CommonLibrary.inputStream2String(is));
+ }
 }

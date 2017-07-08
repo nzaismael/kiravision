@@ -6,8 +6,9 @@
     <client name="WsClient">
       <wsdl-url>http://gateway.esicia.com/?wsdl</wsdl-url>
       <local-wsdl-file>gateway.esicia.com/.wsdl</local-wsdl-file>
-      <package-name forceReplace="true">com.kira.sms.client</package-name>
+      <package-name>com.esicia.gateway.soap.ksms</package-name>
       <catalog-file>catalog.xml</catalog-file>
+      <use-dispatch>true</use-dispatch>
       <wsimport-options>
         <wsimport-option>
           <wsimport-option-name>extension</wsimport-option-name>
@@ -32,10 +33,6 @@
         <wsimport-option>
           <wsimport-option-name>xendorsed</wsimport-option-name>
           <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>package</wsimport-option-name>
-          <wsimport-option-value>com.kira.sms.client</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>

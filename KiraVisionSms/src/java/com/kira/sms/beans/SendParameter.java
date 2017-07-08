@@ -98,5 +98,5 @@ public class SendParameter {
         this.phone = phone;
     }
 
-    
+  
 }
