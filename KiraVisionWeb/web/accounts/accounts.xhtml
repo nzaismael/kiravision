@@ -15,13 +15,15 @@
          
         
       
-            <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="../design/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <script src="../design/js/jquery-1-12.23.js" type="text/javascript"></script>
-        <script src="../design/js/bootstrap.min.js" type="text/javascript"></script>
+         <link href="/KiraVisionWeb/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/KiraWebVision/design/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="/KiraVisionWeb/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
-        
+        <link href="/KiraVisionWeb/design/css/chosen.css" rel="stylesheet" type="text/css"/>
+  
         <style>
             .aligntop td {
                 vertical-align: top;
@@ -69,16 +71,19 @@
     <h:body>
         
         <ui:include src="../mainMenu/header.xhtml"/>
-        
+       
         <div class="container-fluid" >
             <div class="row content col-sm-12" >
                 <div class="col-sm-3 sidenav" style=" overflow-x:  scroll;">
                     <h:form id="sidecli">
                         <rich:panel header="Account Operations">
                             <h:panelGroup id="accountside">
-
-                                <a4j:commandButton  action="#{accountController.listAccountsMenu()}" id="listaccountsbutton1" class="btn btn-primary " style=" width: 100%; text-align: left"  render=":listaccountsid" value="List of Accounts"/>
-                               <a4j:commandButton  action="#{accountController.transactions()}" id="listaccountsbutton7" class="btn btn-primary " style=" width: 100%; text-align: left"  render=":listaccountsid" value="Transactions1"/>
+                               
+                               <a4j:commandButton  action="#{accountController.transactions()}" id="listaccountsbutton1" class="btn btn-primary " style=" width: 100%; text-align: left"  render=":listaccountsid" value="Commissions"/>
+                                
+                                <a4j:commandButton  action="#{accountController.listAccountsMenu()}" id="listaccountsbutton2" class="btn btn-primary " style=" width: 100%; text-align: left"  render=":listaccountsid" value="List of Accounts"/>
+                                 <a4j:commandButton  action="#{accountController.listAccountsMenu()}" id="listaccountsbutton3" class="btn btn-primary " style=" width: 100%; text-align: left"  render=":listaccountsid" value="Account Types"/>
+                               <a4j:commandButton  action="#{accountController.transactions()}" id="listaccountsbutton4" class="btn btn-primary " style=" width: 100%; text-align: left"  render=":listaccountsid" value="Operations"/>
                                                           
                             </h:panelGroup>
                         </rich:panel>

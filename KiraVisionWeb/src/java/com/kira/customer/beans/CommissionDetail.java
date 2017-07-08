@@ -32,7 +32,10 @@ public class CommissionDetail implements Serializable{
     private double amount;
 
     
-    
+    public String toString()
+    {
+        return this.getCommissionName();
+    }
     
     /**
      * @return the commisionCode

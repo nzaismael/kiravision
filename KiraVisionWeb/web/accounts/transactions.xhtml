@@ -2,12 +2,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+      
+        
     </h:head>
     <h:body>
+        <h:form id="commissionId">
+        <a4j:poll id="poll" interval="20000" action="#{accountController.transactions()}" enabled="true" render="poll,commissionsData"  />
+        <h:panelGroup id="commissionsData" >
+            <h:outputLabel for="fromid" value="From"/>  <rich:calendar popup="true" datePattern="dd/MM/yyyy" id="fromid" enableManualInput="true" value="#{accountController.periodBean.from}"  /> <h:outputLabel for="toid" value="To"/>  <rich:calendar popup="true" id="toid" datePattern="dd/MM/yyyy" enableManualInput="true" value="#{accountController.periodBean.to}" />
+        <h:commandButton value="SEARCH"  action="#{accountController.transactions()}" class="btn btn-sm btn-primary"/>
+         
        
+           
          <table class="table table-hover table-striped" id="purchasestb" >
                                         <thead>
                                             <tr>
@@ -28,7 +40,9 @@
                                                         
                                                     </td>
                                                     <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{coms.commissionName}</td>
-                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{coms.amount}</td>
+                                                    <td class='col-xs-1 col-sm-1 col-md-1 col-lg-1'> <h:outputText value="#{coms.amount}">
+                                                            <f:convertNumber pattern="##,###"/>
+                                                        </h:outputText></td>
                                                      
                                                     
        
@@ -39,13 +53,30 @@
                                                 
                                             </c:forEach> 
                                             
-                                            
+                                            <script type="text/javascript">
+                     
+                        var  table=  $('#accountstbl').dataTable({
+                        
+                            "autoWidth": true,  
+                            "sPaginationType": "full_numbers",
+                            "destroy":true,
+                            "order": [[ 0, 'asc' ]],
+                            "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]]
+                        
+                        
+                        } );
+                    
+                    
+                    
+                    
+                    </script>   
+
                                         </tbody> 
                                         
                                         
                                     </table>  
-        
-        
+        </h:panelGroup>
+        </h:form>
     </h:body>
 </html>
 

@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CardHolders implements Serializable {
   @XmlElement(name="CLIENT")
-   private List<CardHolder> customers = new ArrayList();
+   private List<CardHolder> customers = new ArrayList<>();
 
     /**
      * @return the customers

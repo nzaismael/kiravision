@@ -49,10 +49,10 @@ public class LoginController implements Serializable {
        {
            String xmlresponse = response.readEntity(String.class);
       
-       System.out.println(xmlresponse);
+      // System.out.println(xmlresponse);
        this.setLoginUser((User)CommonLibrary.unmarshalling(xmlresponse, User.class));
          navigation.setCurrentPage("mainMenu/menus.xhtml");
-         System.out.println(this.getLoginUser().getUserId());
+       //  System.out.println(this.getLoginUser().getUserId());
        }
        catch(Exception e)
        {

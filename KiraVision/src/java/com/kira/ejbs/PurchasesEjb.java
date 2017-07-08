@@ -7,6 +7,7 @@ package com.kira.ejbs;
 
 import com.kira.beans.CommissionDetail;
 import com.kira.beans.NewPurchase;
+import com.kira.beans.PurchaseCommissions;
 import com.kira.beans.PurchaseResponsePOS;
 import com.kira.beans.SendParameter;
 import com.kira.entities.PurchaseBean;
@@ -130,14 +131,33 @@ public class PurchasesEjb {
        // purchase.setClient(cardHolder.getcardHolderbyPhone(phone));
     }
    
-   public List<PurchaseCommissionsDetail> purchases()
+   public PurchaseCommissions purchasesCommissions(java.util.Date from, java.util.Date to)
    {
-    Query query = em.createQuery("select pd from PurchaseCommissionsDetail pd ");
+    Query query = em.createQuery("select pd from PurchaseCommissionsDetail pd where cast(pd.purchase.purchaseOn as date) between :from and :to ");
   //  List<PurchaseCommissionsDetail> coms =query.getResultList();
     //CommissionsDetails comdes = new CommissionsDetails();
   //  System.out.println(query.getResultList().size());
+  query.setParameter("from", from);
+  query.setParameter("to", to);
+  List<CommissionDetail> comdet = new ArrayList<>();
+  List<PurchaseCommissionsDetail> coms = query.getResultList();
+   coms.parallelStream()
+                .map(com->{
+                return new CommissionDetail(com);
+                })
+              .forEach(comdet::add);
+        
+        
+        
+      PurchaseCommissions comdets = new PurchaseCommissions();       
+        comdets.setComdetails(comdet);
+        
+        System.out.println("in the service "+comdets.getComdetails().size());
+   //  return    mapper.writeValueAsString(comdets);
+     return  comdets;
+  
     
-    return query.getResultList();
+    //return query.getResultList();
        
       
    }

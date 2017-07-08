@@ -60,7 +60,7 @@ public class EconomicAgentUssdActions {
         urs.setMenuTitle("Choisir^^");
         List<String> list1=new ArrayList();
         list1.add("11. New Customer^");
-        list1.add("2. My Customers^");
+        list1.add("2. My Customers(Number)^");
         list1.add("3. Card Remittance^");
         list1.add("4. My Account^");
         list1.add("5. Change Pin^");

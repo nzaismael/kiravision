@@ -9,6 +9,7 @@ import com.kira.customer.beans.AccountBean;
 import com.kira.customer.beans.AccountsBean;
 import com.kira.customer.beans.CommissionDetail;
 import com.kira.customer.beans.CommissionsDetails;
+import com.kira.customer.beans.PeriodBean;
 import com.kira.ussd.utilities.CommonLibrary;
 import com.settings.beans.AccountType;
 import com.settings.beans.AccountTypes;
@@ -18,6 +19,7 @@ import com.settings.beans.CurrenciesBean;
 import com.settings.beans.CurrencyBean;
 import com.settings.controller.LoginController;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -31,6 +33,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  *
@@ -53,6 +56,7 @@ public class AccountController implements Serializable {
      private AccountTypes accountSchemas = new AccountTypes();
      private CommissionDetail commissionDetail = new CommissionDetail();
      private CommissionsDetails commissionsDetails = new CommissionsDetails();
+     private PeriodBean periodBean = new PeriodBean();
      
     @ManagedProperty(value = "#{login}")
     private LoginController login;
@@ -65,25 +69,21 @@ public class AccountController implements Serializable {
         String xmlCurrency = rescur.readEntity(String.class);
         setCurrencies((CurrenciesBean)CommonLibrary.unmarshalling(xmlCurrency, CurrenciesBean.class));
         
-      /// listing Banks
-      String urlbank="http://localhost:8080/KiraVision/users/bank/allBanks";
-        Response resban = CommonLibrary.sendRESTRequest(urlbank, "", MediaType.TEXT_PLAIN, "GET");
-        String xmlbank = resban.readEntity(String.class);
-        setBanks((BanksBean)CommonLibrary.unmarshalling(xmlbank, BanksBean.class));
-         
+     
         /// Account Types
         
      String urltype="http://localhost:8080/KiraVision/users/type/accounttypes";
      Response restypes = CommonLibrary.sendRESTRequest(urltype, "", MediaType.TEXT_PLAIN, "GET");
         String xmltype = restypes.readEntity(String.class);
         setAccountSchemas((AccountTypes)CommonLibrary.unmarshalling(xmltype, AccountTypes.class));
-        
+        System.out.println(xmltype);
           
     }
     
     public String haveListofAccounts() throws Exception
     {
-        
+        this.getPeriodBean().setFrom(new java.util.Date());
+        this.getPeriodBean().setTo(new java.util.Date());
         String url = "http://localhost:8080/KiraVision/account/allaccounts";
         Response response=CommonLibrary.sendRESTRequest(url, "", MediaType.TEXT_PLAIN, "GET");
         if(response.getStatus()==200)
@@ -100,7 +100,12 @@ public class AccountController implements Serializable {
         this.setContentPage("listAccounts.xhtml");
         this.setPageTitle("List of Accounts");
         
-       
+         /// listing Banks
+      String urlbank="http://localhost:8080/KiraVision/users/bank/allBanks";
+        Response resban = CommonLibrary.sendRESTRequest(urlbank, "", MediaType.TEXT_PLAIN, "GET");
+        String xmlbank = resban.readEntity(String.class);
+        setBanks((BanksBean)CommonLibrary.unmarshalling(xmlbank, BanksBean.class));
+         System.out.println("here in the change type: "+xmlbank); 
       
         //System.out.println(getLogin().getLoginUser().getUsername());
         return null;
@@ -112,6 +117,7 @@ public class AccountController implements Serializable {
   
 public void changeAccountType(AjaxBehaviorEvent event)
 {
+   
   try
   {
     String urlaccountType = "http://localhost:8080/KiraVision/users/type/accounttypes/"+this.getAccountSchema().getId();
@@ -121,6 +127,7 @@ public void changeAccountType(AjaxBehaviorEvent event)
     acc=(AccountType)CommonLibrary.unmarshalling(xml, AccountType.class);
     if(acc!=null)
     {
+      
     this.setAccountSchema(acc);
     }
     else
@@ -215,7 +222,7 @@ public String listAccountsMenu()
 public String accountOperationMenu() throws Exception
 {
     
-   //FacesContext.getCurrentInstance().getExternalContext().redirect("/KiraVisionWeb/accounts/entriesExport.xhtml");
+   //FacesContext.getCurrentInstance().getExternalContext().redirect("..//accounts/entriesExport.xhtml");
         
    this.setContentPage("entriesExport.xhtml");
         this.setPageTitle("Daily Accounting Operations"); 
@@ -224,14 +231,49 @@ public String accountOperationMenu() throws Exception
     return null;
 }
 
-public String transactions()
+public String transactions() throws Exception
 {
-    String purchasesurl = "http://localhost:8080/KiraVision/purchases/purchasestransactions";
+    
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+   /* if(getPeriodBean().getFrom().equals(null))
+    {
+        period
+    }*/
+    
+    String purchasesurl = "http://localhost:8080/KiraVision/purchases/purchasestransactions/"+sdf.format(getPeriodBean().getFrom())+"/"+sdf.format(getPeriodBean().getTo());
+    System.out.println(purchasesurl);
     Response response = CommonLibrary.sendRESTRequest(purchasesurl, "", MediaType.TEXT_PLAIN, "GET");
+   
     if(response.getStatus()==200)
     {
      String xml=  response.readEntity(String.class);
-       this.setCommissionsDetails((CommissionsDetails)CommonLibrary.unmarshalling(xml, CommissionsDetails.class));
+     System.out.println(xml);
+     ObjectMapper mapper = new ObjectMapper();
+     this.setCommissionsDetails((CommissionsDetails)mapper.readValue(xml,CommissionsDetails.class));
+       // System.out.println(response.getStatus());
+       
+    // this.setCommissionsDetails((CommissionsDetails)CommonLibrary.unmarshalling(xml, CommissionsDetails.class));
+   
+    //,CommissionDetail> totalAgeByGender ;
+    /*roster
+        .stream()
+        .collect(
+            Collectors.groupingBy(
+                Person::getGender,                      
+                Collectors.mapping(
+                    Person::getName,
+                    Collectors.List())));*/
+    
+    
+ //this.getCommissionsDetails().getComdetails().stream()
+              //    .collect(Collectors.groupingBy(CommissionDetail::getCommisionCode, Collectors.mapping(CommissionDetail::getCommissionName,Collectors.toList())));
+ //     Map<String, List<CommissionDetail>> byDept = this.getCommissionsDetails().getComdetails().stream()
+//.collect(Collectors.groupingBy(CommissionDetail::getCommissionAcount));
+ 
+
+   //System.out.println(totalByDept.keySet());
+    
+   
     }
     else
     {
@@ -423,5 +465,19 @@ public String transactions()
      */
     public void setCommissionsDetails(CommissionsDetails commissionsDetails) {
         this.commissionsDetails = commissionsDetails;
+    }
+
+    /**
+     * @return the periodBean
+     */
+    public PeriodBean getPeriodBean() {
+        return periodBean;
+    }
+
+    /**
+     * @param periodBean the periodBean to set
+     */
+    public void setPeriodBean(PeriodBean periodBean) {
+        this.periodBean = periodBean;
     }
 }

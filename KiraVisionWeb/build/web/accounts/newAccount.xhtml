@@ -8,8 +8,8 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../design/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="../design/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -43,13 +43,13 @@
                 
             </h:panelGrid>
            
-            <h:panelGroup id="output"  >
+            <h:panelGroup id="output"   >
                     <h:outputLabel for="bankid" value="Commercial Bank"/>
-                    <h:selectOneMenu id ="bankid" value="#{accountController.bank.id}"  disabled="#{accountController.accountSchema.id ne 1}" >
+                    <h:selectOneMenu id ="bankid" value="#{accountController.bank.id}" disabled="#{accountController.accountSchema.accountGroup ne 'B'}" >
                   
-                    <f:selectItem itemValue="0" itemLabel="--select--" />
-                    <f:selectItems value="#{accountController.banks.banks}" var="as"
-                                   itemLabel="#{as.bankFull}" itemValue="#{as.id}" > 
+                    <f:selectItem itemValue="0" itemLabel="--select Bank--"  />
+                    <f:selectItems value="#{accountController.banks.banks}" var="bs"
+                                   itemLabel="#{bs.bankFull}" itemValue="#{bs.id}" > 
                    
                     </f:selectItems>
                    	</h:selectOneMenu> 

@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Kira%20Vision/kiravision/KiraVisionUSSD/src/java/com/kira/ussd/service/MtnUssdExtension.java</file>
+            <file>file:/C:/Kira%20Vision/kiravision/KiraVisionUSSD/src/java/ussd/kira/messageResources/UssdMessageBundle_en.properties</file>
+            <file>file:/C:/Kira%20Vision/kiravision/KiraVisionUSSD/src/java/com/kira/ussd/service/KiraVisionUssd.java</file>
+            <file>file:/C:/Kira%20Vision/kiravision/KiraVisionUSSD/src/java/com/kira/ussd/utilities/CommonLibrary.java</file>
+            <file>file:/C:/Kira%20Vision/kiravision/KiraVisionUSSD/src/java/ussd/kira/messageResources/UssdMessageBundle_fr.properties</file>
+            <file>file:/C:/Kira%20Vision/kiravision/KiraVisionUSSD/src/java/ussd/kira/messageResources/BundleResourceManager.java</file>
+            <file>file:/C:/Kira%20Vision/kiravision/KiraVisionUSSD/src/java/ussd/kira/messageResources/UssdMessageBundle_kin.properties</file>
+        </group>
     </open-files>
 </project-private>

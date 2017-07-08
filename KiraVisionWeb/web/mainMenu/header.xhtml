@@ -17,14 +17,14 @@
         
         
     <h:body>
-        
+        <ui:composition>
         
         <!-- HEADER -->
             
         <!-- Top -->
         <div class="container-fluid" style="margin:0px;padding:0px;">
             <div style="height:65px;font-family:ubuntu;margin:0px;padding:0px;">
-                <div class="col-xs-4"> <img src="http://localhost:8080/KiraVisionWeb/design/images/logo1.png"  alt="No logo" class="img-responsive"/></div>
+                <div class="col-xs-4"> <img src="/KiraVisionWeb/design/images/logo1.png"  alt="No logo" class="img-responsive"/></div>
                 <div class="col-xs-3" style="text-align: center"><span class="label label-primary">#{login.loginUser.userSurname} #{login.loginUser.username}</span></div>
                 <div class="col-xs-5" style="margin:0px;padding:0px;line-height:60px;text-align:right;font-size:30px;color:#0053a5;"><strong class="hidden-xs">KIRA VISION MIS</strong> <a href="#" class="logout">Logout</a></div>
             </div>
@@ -38,10 +38,10 @@
                 <div class="col-xs-12" style="margin:0px;padding:0px;border:0px solid red;">
                     <h:form>
                     
-                    <a id="dashboardId" href="/KiraVisionWeb/dashboard/dashboard.xhtml" class="omenu col-xs-1" >Dashboard</a>
+                    <a id="dashboardId" href="../dashboard/dashboard.xhtml" class="omenu col-xs-1" >Dashboard</a>
                     
                     <a4j:commandLink id="customerId" action="#{customer.listCustomers()}" class="omenu col-xs-1">Customers</a4j:commandLink>
-                  <!--  <a id="serviceProviderId"  href="/KiraVisionWeb/customer/customerIndex.xhtml" class="omenu col-xs-1" >Customers</a> -->
+                  <!--  <a id="serviceProviderId"  href="..//customer/customerIndex.xhtml" class="omenu col-xs-1" >Customers</a> -->
                   <a4j:commandLink id="partnerId" action="#{partner.listPartners()}" class="omenu col-xs-2">Partners</a4j:commandLink>
                 
                   <!--<a id="customersId"  href="/HealthInsuranceWeb/faces/customers/customers.xhtml" class="omenu col-xs-1 " >Partners</a> -->
@@ -119,7 +119,7 @@
         <!-- End HEADER-->
             
             
-            
+       </ui:composition>     
             
             
     </h:body>

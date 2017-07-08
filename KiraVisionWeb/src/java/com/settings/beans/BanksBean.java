@@ -18,7 +18,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author AOS
  */
 
-
+@XmlRootElement(name="BANKS")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BanksBean implements Serializable {
     @XmlElement(name="BANK")
     private List<BankBean>banks = new ArrayList<>();

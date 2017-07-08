@@ -50,7 +50,7 @@ public class SettingsController implements Serializable {
       //System.out.println(this.getSysUsers().getListUsers().size());
       this.setLeftPageMenu("users.xhtml");
      this.setPageTitle("Users");
-      FacesContext.getCurrentInstance().getExternalContext().redirect("/KiraVisionWeb/settings/settings.xhtml");
+      FacesContext.getCurrentInstance().getExternalContext().redirect("..//settings/settings.xhtml");
      
   }
   public void addNewUser()

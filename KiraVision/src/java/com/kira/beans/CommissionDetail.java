@@ -29,6 +29,10 @@ public class CommissionDetail implements Serializable{
      amount=comdet.getCommissionAmount();
  }
     
+ public CommissionDetail()
+ {
+     
+ }
     
     
     @XmlElement(name="COMMISSIONCODE")

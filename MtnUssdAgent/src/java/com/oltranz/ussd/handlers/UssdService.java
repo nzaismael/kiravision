@@ -93,7 +93,8 @@ public class UssdService {
          String inputstreamtext = CommonLibrary.inputStream2String(is);
         System.out.println(inputstreamtext);
         UssdCenterResponse ussdCenterResponse=(UssdCenterResponse) CommonLibrary.unmarshalling(inputstreamtext, UssdCenterResponse.class);
-            return ussdHelper.getUssdResponse(200,ussdCenterResponse);
+           return ussdHelper.getUssdResponse(200,ussdCenterResponse);
+  // return null;
     }
 
 }

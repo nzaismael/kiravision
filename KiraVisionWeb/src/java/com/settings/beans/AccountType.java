@@ -31,7 +31,8 @@ public class AccountType  implements Serializable{
  private int id;
   private String accountGroup;
  private String Description;
-
+ String OperationBean;
+ 
     /**
      * @return the id
      */

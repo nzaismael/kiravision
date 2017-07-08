@@ -19,10 +19,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="COMMISSIONS")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CommissionsDetails implements Serializable{
+public class PurchaseCommissions implements Serializable{
     
-    @XmlElement(name="COMMISSION")
-    private List<CommissionDetail> comdetails = new ArrayList<>();
+      @XmlElement(name="COMMISSION")
+    private List<CommissionDetail> comdetails = new ArrayList();
 
     /**
      * @return the comdetails
